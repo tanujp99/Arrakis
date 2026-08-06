@@ -1,49 +1,62 @@
-![DownloadCount](https://img.shields.io/github/downloads/sakasakiking/Dune/total.svg)
+# Arrakis
 
-# Dune
+A personal fork of the [Dune](https://github.com/sakasakiking/Dune) theme for
+[Playnite](https://github.com/JosefNemec/Playnite) Desktop Mode, reshaped for
+using Playnite as a **catalog** of owned games across platforms rather than as a
+launcher.
 
-### You might need to know before use, the dark mode still has issues due to the restrctions of the theme itself. And it won't be supported untill Playnite 11. Sorry for it.
+Forked from Dune 0.9.4. All of Dune's original look and dual light/dark modes are
+intact; the changes are structural.
 
-### Now you can switch Dune to Dune Night！ [How to play with Dune?](https://github.com/sakasakiking/Dune/wiki/How-to-play-with-Dune-Theme%3F)
-Hi guys, Dune is a dual color mode theme (Light and Dark), super clean and simple (This's what I hope it to be)Theme for [Playnite](https://github.com/JosefNemec/Playnite) Desktop Mode. 
-## Preparation and Settings
-It's using ``Segoe Fluent Icons`` for the theme, you might need to download the [Segoe Fluent Icons](https://learn.microsoft.com/zh-cn/windows/apps/design/downloads/#fonts)
+## What differs from Dune
 
-## Screenshots
-![Screenshot](https://raw.githubusercontent.com/sakasakiking/Dune/refs/heads/main/Screenshots/Screenshots01.jpg)
-![Screenshot](https://raw.githubusercontent.com/sakasakiking/Dune/refs/heads/main/Screenshots/Screenshots02.jpg)
-![Screenshot](https://raw.githubusercontent.com/sakasakiking/Dune/refs/heads/main/Screenshots/Screenshots03.jpg)
-![Screenshot](https://raw.githubusercontent.com/sakasakiking/Dune/refs/heads/main/Screenshots/Screenshots04.jpg)
-![Screenshot](https://raw.githubusercontent.com/sakasakiking/Dune/refs/heads/main/Screenshots/Screenshots05.jpg)
-![Screenshot](https://raw.githubusercontent.com/sakasakiking/Dune/refs/heads/main/Screenshots/Screenshots06.jpg)
+**Grid view overview panel** — the right-hand details panel is a single column of
+cards instead of a two-column split, and is narrow by default (480px, with the
+ThemeModifier slider floor lowered from 1024 to 360 so it can be dragged down).
+The play / install / context action buttons and the install-directory block are
+gone, since nothing here is launched from Playnite. Remaining fields are grouped
+into three cards:
 
-## Recommended Playnite settings to avoid issues and reach the visual effect shown in the screenshots
-Making...
+- **Play Stats** — data about *this copy*: platform, library, time played, last
+  played, date added, completion status, achievements.
+- **Details** — data intrinsic to the game: developer, publisher, series, release
+  date, age rating, region, scores, categories, features, tags.
+- **How Long To Beat** — a hand-built horizontal card. The HLTB plugin's own
+  control lays out vertically, which does not fit a narrow panel.
 
-## Support
-- If you found a bug or want to request a feature, please open a new issue in the [Issues Tracker](https://github.com/sakasakiking/FusionX/issues)
-- For general support, please contact me in the channel dedicated to themes support in the [Playnite Discord](https://discord.com/channels/365863063296933888/808419347105447957)
+**Platform banners on grid tiles** — eShop-style banners across the top of each
+cover, driven by the
+[ThemeExtras](https://github.com/felixkmh/ThemeExtras-for-Playnite) plugin.
+Upstream Dune had this scaffolded but unfinished; this fork completes it. Banner
+assets are from [Helium](https://github.com/darklinkpower/Helium), plus custom
+Switch and Switch 2 art.
 
-## Installation
-- **A**: Download the latest packaged `pthm` theme file from the [Releases page](https://github.com/sakasakiking/Dune/releases/tag/Latest) and open it.
-- **B**: Click the `Download` button on the [Playnite addon page](https://playnite.link/addons.html#Dune_267ceefe-e1d4-4817-ac57-0b4ae5b7f884) to start the install process.
-- **C**: Download from the Addons browser in Playnite.
+Banners are matched purely by filename under `Source/Images/Banners/`, in
+priority order: `PlatformSpecId/` → `PlatformName/` → `PluginId/` →
+`SourceName/` → `UnknownLibrary.png`. First match wins; no XAML maps platforms to
+images.
 
-## Extensions Support
-Fow now, it support
-- **Achievements:** [SuccessStory](https://playnite.link/addons.html#playnite-successstory-plugin) extension.
-- **HowLongToBeat data:** [HowLongToBeat](https://playnite.link/addons.html#playnite-howlongtobeat-plugin) extension.
-- **Logos:** [Extra Metadata Loader](https://playnite.link/addons.html#ExtraMetadataLoader_705fdbca-e1fc-4004-b839-1d040b8b4429) extension.
-- **Screenshots:** [ScreenshotsVisualizer](https://playnite.link/addons.html#playnite-screenshotsvisualizer-plugin) extension.
-- **Videos** [Extra Metadata Loader](https://playnite.link/addons.html#ExtraMetadataLoader_705fdbca-e1fc-4004-b839-1d040b8b4429) extension.
-Addiing more...
+## Requirements
 
-## More
+- Playnite Desktop Mode, theme API 2.8.0+
+- [Segoe Fluent Icons](https://learn.microsoft.com/en-us/windows/apps/design/downloads/#fonts)
+  (inherited from Dune)
+- Optional: **ThemeExtras** for platform banners, **HowLongToBeat** and
+  **SuccessStory** for those cards. Each degrades to nothing if not installed.
 
-**Special Thanks** 
-- Daryl Hornsby
-- adrian5683
+## Layout
 
+Theme files live in `Source/`. Playnite loads themes from
+`Playnite\Themes\Desktop\<theme id>\`, which here is a directory junction
+pointing at `Source/`, so edits are live in the app and version-controlled in
+one place.
 
+## Credits
 
+- [Dune](https://github.com/sakasakiking/Dune) by **sakasaki** — the base theme.
+- [Helium](https://github.com/darklinkpower/Helium) by **darklinkpower** — Dune's
+  own ancestor, and the source of the banner assets.
+- [ThemeExtras](https://github.com/felixkmh/ThemeExtras-for-Playnite) by
+  **felixkmh** — the banner control.
 
+MIT licensed, as is upstream Dune. See [LICENSE](LICENSE).
