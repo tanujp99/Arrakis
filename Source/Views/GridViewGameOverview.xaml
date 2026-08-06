@@ -1058,18 +1058,18 @@
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Played">
                                                         <Setter Property="Visibility" Value="Visible" />
-                                                        <Setter Property="Fill" Value="#B87333" />
-                                                        <Setter Property="Stroke" Value="#7A4A20" />
+                                                        <Setter Property="Fill" Value="#E9B824" />
+                                                        <Setter Property="Stroke" Value="#8A6508" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Beaten">
                                                         <Setter Property="Visibility" Value="Visible" />
-                                                        <Setter Property="Fill" Value="#C8CDD4" />
-                                                        <Setter Property="Stroke" Value="#8A9099" />
+                                                        <Setter Property="Fill" Value="#10B981" />
+                                                        <Setter Property="Stroke" Value="#0A6E4E" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Completed">
                                                         <Setter Property="Visibility" Value="Visible" />
-                                                        <Setter Property="Fill" Value="#F2C230" />
-                                                        <Setter Property="Stroke" Value="#A67C0B" />
+                                                        <Setter Property="Fill" Value="#E0115F" />
+                                                        <Setter Property="Stroke" Value="#8A0A38" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Abandoned">
                                                         <Setter Property="Visibility" Value="Visible" />

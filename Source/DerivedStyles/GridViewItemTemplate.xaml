@@ -160,11 +160,16 @@
                                     means one Fill and one Stroke to set per status instead of
                                     juggling several elements.
 
-                                    Bronze for played, silver for beaten, gold for completed, so
-                                    the metal itself carries the ranking. Playing is an outline:
-                                    earned nothing yet, but in progress. Nothing shows at all for
-                                    not played, plan to play, or no status: an empty shelf rather
-                                    than a participation award.
+                                    Gold for played, then gems above it: emerald for beaten,
+                                    ruby for completed. Finishing a game is the achievement worth
+                                    rewarding, so the top two tiers outrank the metal rather than
+                                    continuing it. Flat single colours, not gradients, because a
+                                    multicoloured 28px icon reads as mud.
+
+                                    Playing and on hold are outlines: in progress, nothing earned.
+                                    Abandoned is a dulled grey. Nothing shows at all for not played,
+                                    plan to play, or no status: an empty shelf rather than a
+                                    participation award.
                                 -->
                                 <Grid Name="TrophyOverlay">
                                     <Grid.ColumnDefinitions>
@@ -202,18 +207,18 @@
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Played">
                                                             <Setter Property="Visibility" Value="Visible" />
-                                                            <Setter Property="Fill" Value="#B87333" />
-                                                            <Setter Property="Stroke" Value="#7A4A20" />
+                                                            <Setter Property="Fill" Value="#E9B824" />
+                                                            <Setter Property="Stroke" Value="#8A6508" />
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Beaten">
                                                             <Setter Property="Visibility" Value="Visible" />
-                                                            <Setter Property="Fill" Value="#C8CDD4" />
-                                                            <Setter Property="Stroke" Value="#8A9099" />
+                                                            <Setter Property="Fill" Value="#10B981" />
+                                                            <Setter Property="Stroke" Value="#0A6E4E" />
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Completed">
                                                             <Setter Property="Visibility" Value="Visible" />
-                                                            <Setter Property="Fill" Value="#F2C230" />
-                                                            <Setter Property="Stroke" Value="#A67C0B" />
+                                                            <Setter Property="Fill" Value="#E0115F" />
+                                                            <Setter Property="Stroke" Value="#8A0A38" />
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Abandoned">
                                                             <Setter Property="Visibility" Value="Visible" />
