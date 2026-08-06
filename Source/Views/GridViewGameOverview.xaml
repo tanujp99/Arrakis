@@ -461,7 +461,7 @@
                                                                             <Label Name="PART_ElemSeries" Content="{DynamicResource LOCSeriesLabel}" />
                                                                             <ItemsControl Name="PART_ItemsSeries" />
 
-                                                                            <Label Content="{DynamicResource LOCReleaseDateLabel}" />
+                                                                            <Label Content="{DynamicResource LOCGameReleaseDateTitle}" />
                                                                             <Button Name="PART_ButtonReleaseDate" Margin="0,12,0,0" />
 
                                                                             <Label Name="PART_ElemAgeRating" Content="{DynamicResource LOCAgeRatingLabel}" />
@@ -470,14 +470,30 @@
                                                                             <Label Name="PART_ElemRegion" Content="{DynamicResource LOCRegionLabel}" />
                                                                             <ItemsControl Name="PART_ItemsRegions" />
 
-                                                                            <Label Name="PART_ElemCommunityScore" Content="{DynamicResource LOCCommunityScore}" />
-                                                                            <TextBlock Name="PART_TextCommunityScore" Margin="0,12,0,0" Style="{DynamicResource TextBlockGameScore}" />
+                                                                            <!--
+                                                                                Critic and community scores are properties of the game, so
+                                                                                they live here. The player's own score is "this copy" data
+                                                                                and sits in the Play Stats card instead.
 
+                                                                                Tag and Visibility are forwarded from the PART_ TextBlock,
+                                                                                which is the only element Playnite wires up: it sets the
+                                                                                ScoreRating that picks the colour, and collapses the row
+                                                                                when there is no score. Without the Visibility binding an
+                                                                                empty badge would be left behind.
+                                                                            -->
                                                                             <Label Name="PART_ElemCriticScore" Content="{DynamicResource LOCCriticScore}" />
-                                                                            <TextBlock Name="PART_TextCriticScore" Margin="0,12,0,0" Style="{DynamicResource TextBlockGameScore}" />
+                                                                            <Border Style="{DynamicResource ScoreBadgeBorder}"
+                                                                                    Tag="{Binding ElementName=PART_TextCriticScore, Path=Tag}"
+                                                                                    Visibility="{Binding ElementName=PART_TextCriticScore, Path=Visibility}">
+                                                                                <TextBlock Name="PART_TextCriticScore" Style="{DynamicResource ScoreBadgeText}" />
+                                                                            </Border>
 
-                                                                            <Label Name="PART_ElemUserScore" Content="{DynamicResource LOCUserScore}" />
-                                                                            <TextBlock Name="PART_TextUserScore" Margin="0,12,0,0" Style="{DynamicResource TextBlockGameScore}" />
+                                                                            <Label Name="PART_ElemCommunityScore" Content="{DynamicResource LOCCommunityScore}" />
+                                                                            <Border Style="{DynamicResource ScoreBadgeBorder}"
+                                                                                    Tag="{Binding ElementName=PART_TextCommunityScore, Path=Tag}"
+                                                                                    Visibility="{Binding ElementName=PART_TextCommunityScore, Path=Visibility}">
+                                                                                <TextBlock Name="PART_TextCommunityScore" Style="{DynamicResource ScoreBadgeText}" />
+                                                                            </Border>
 
                                                                             <Label Name="PART_ElemCategories" Content="{DynamicResource LOCGameCategoriesTitle}" />
                                                                             <ItemsControl Name="PART_ItemsCategories" />
@@ -610,6 +626,18 @@
                                                                 <StackPanel Margin="20,16,20,16">
                                                                     <TextBlock Text="{DynamicResource LOCPlayStats}" FontWeight="Bold" />
                                                                     <GridEx x:Name="PlayStatsGrid" ColumnCount="2" StarColumns="1" RowCount="25" AutoLayoutColumns="2">
+
+                                                                        <!--
+                                                                            The player's own score leads this card: it is the most
+                                                                            personal datum here, and the one field on the panel that
+                                                                            is theirs rather than the game's.
+                                                                        -->
+                                                                        <Label Name="PART_ElemUserScore" Content="{DynamicResource LOCUserScore}" />
+                                                                        <Border Style="{DynamicResource ScoreBadgeBorder}"
+                                                                                Tag="{Binding ElementName=PART_TextUserScore, Path=Tag}"
+                                                                                Visibility="{Binding ElementName=PART_TextUserScore, Path=Visibility}">
+                                                                            <TextBlock Name="PART_TextUserScore" Style="{DynamicResource ScoreBadgeText}" />
+                                                                        </Border>
 
                                                                         <Label Content="{DynamicResource LOCPlatformTitle}" />
                                                                         <ItemsControl ItemsSource="{Binding Game.Platforms}" Margin="0,8,0,0" />
