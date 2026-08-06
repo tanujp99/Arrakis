@@ -13,13 +13,11 @@
                         <Grid x:Name="ItemGrid" Background="{DynamicResource GridItemBackgroundBrush}">
 
                             <ContentPresenter />
-                            <Border x:Name="SelectedGlossHighlightBorder" BorderThickness="2" Margin="-4" Visibility="Collapsed" Style="{DynamicResource GlossHighlightBorder}"
+                            <Border x:Name="SelectedGlossHighlightBorder" BorderThickness="3" Margin="-4" Visibility="Collapsed" Style="{DynamicResource GlossHighlightBorder}"
                                     Tag="{DynamicResource GridViewGameCoverUseRoundedCorners}">
                             </Border>
-                            <Border x:Name="SelectedBorder" BorderThickness="2" Margin="-4" Visibility="Collapsed" Style="{DynamicResource SelectedCoverBorder}"
-                                    Tag="{DynamicResource GridViewGameCoverUseRoundedCorners}">
-                                <TextBlock x:Name="ThemeSwitchBorder" Visibility="Collapsed" Tag="{DynamicResource ThemeDarkStyle}" />
-                            </Border>
+                            <Border x:Name="SelectedBorder" BorderThickness="3" Margin="-4" Visibility="Collapsed" Style="{DynamicResource SelectedCoverBorder}"
+                                    Tag="{DynamicResource GridViewGameCoverUseRoundedCorners}" />
                             <TextBlock Name="EnableHighlightBorder" Visibility="Collapsed" Tag="{DynamicResource GridViewGameCoverShowHighlightBorder}" />
                         </Grid>
                         <StackPanel Margin="0,8,0,4">
@@ -152,11 +150,16 @@
         <Setter Property="CornerRadius" Value="0" />
         <Setter Property="BorderBrush">
             <Setter.Value>
+                <!--
+                    Was a white sweep, which is invisible on the light theme's
+                    near-white background. Built from the selection accent so the
+                    animated variant reads in both themes, same as the plain ring.
+                -->
                 <LinearGradientBrush StartPoint="1,0" EndPoint="0,1">
-                    <GradientStop Color="#66FFFFFF" Offset="0" />
-                    <GradientStop Color="#66FFFFFF" Offset="0" />
-                    <GradientStop Color="#E0FFFFFF" Offset="0.2" />
-                    <GradientStop Color="#66FFFFFF" Offset="0.6" />
+                    <GradientStop Color="#662F6FED" Offset="0" />
+                    <GradientStop Color="#662F6FED" Offset="0" />
+                    <GradientStop Color="#FF5B8FF5" Offset="0.2" />
+                    <GradientStop Color="#662F6FED" Offset="0.6" />
                 </LinearGradientBrush>
             </Setter.Value>
         </Setter>
@@ -197,17 +200,21 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <!--
+        The brush is set unconditionally, not chosen by a per-theme trigger.
+        The old pair of triggers compared a Tag, typed object, against the
+        strings "True" and "False" while the underlying resource is a Boolean,
+        so they could not be relied on to fire: matching neither left the
+        border with no brush, and matching the dark one painted white on the
+        light theme's near-white background. Both look identical from the
+        outside, which is no visible selection.
+    -->
     <Style x:Key="SelectedCoverBorder" TargetType="Border">
         <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource GridViewSelectionAccentBrush}" />
         <Style.Triggers>
             <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag, Mode=OneWay}" Value="True">
                 <Setter Property="CornerRadius" Value="{DynamicResource GridViewSelectionBorderCornerRadius}" />
-            </DataTrigger>
-            <DataTrigger Binding="{Binding ElementName=ThemeSwitchBorder, Path=Tag, Mode=OneWay}" Value="True">
-                <Setter Property="BorderBrush" Value="{DynamicResource DarkControlAccentBorderBrush}" />
-            </DataTrigger>
-            <DataTrigger Binding="{Binding ElementName=ThemeSwitchBorder, Path=Tag, Mode=OneWay}" Value="False">
-                <Setter Property="BorderBrush" Value="{DynamicResource ControlAccentBorderBrush}" />
             </DataTrigger>
         </Style.Triggers>
     </Style>

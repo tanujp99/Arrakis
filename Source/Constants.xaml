@@ -42,6 +42,15 @@
 
         <SolidColorBrush x:Key="ControlAccentBorderBrush" Color="#000000" />
         <SolidColorBrush x:Key="DarkControlAccentBorderBrush" Color="#FFFFFF" />
+        <!--
+            Selection ring. Deliberately a colour of its own rather than the
+            black/white accents above: those are picked per theme, and picking
+            wrong leaves a white ring on the light theme's near-white
+            background, i.e. no visible selection at all. One saturated colour
+            reads against both.
+        -->
+        <SolidColorBrush x:Key="GridViewSelectionAccentBrush" Color="#2F6FED" />
+        <SolidColorBrush x:Key="GridViewSelectionGlossBrush" Color="#992F6FED" />
 
         <SolidColorBrush x:Key="PopupSeparatorBrush" Color="{DynamicResource PanelSeparatorColor}" />
     
