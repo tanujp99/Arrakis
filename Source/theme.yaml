@@ -1,13 +1,11 @@
 ThemeApiVersion: 2.8.0
-# Id is deliberately left as the upstream Dune id: Playnite derives the theme's
-# folder name from it, and changing it would orphan the existing install and its
-# saved ThemeModifier settings.
-Id: Dune_267ceefe-e1d4-4817-ac57-0b4ae5b7f884
+# Own id, distinct from upstream Dune's. Playnite derives the install folder
+# name from this, so Themes/Desktop/Arrakis_<guid> must match it exactly.
+# Being distinct also means Playnite will never offer an upstream Dune release
+# as an "update" to this fork.
+Id: Arrakis_0dcd3f68-cfaa-4bff-824b-165da182d09e
 Name: Arrakis
 Author: tanuj (fork of Dune by sakasaki)
-# Kept ahead of upstream Dune (0.9.4) on purpose. The addon id above is shared
-# with upstream, so a lower version would let Playnite offer an "update" that
-# overwrites this fork.
 Version: 1.0.0
 Links:
 - Name: Recommended Settings (upstream Dune)
