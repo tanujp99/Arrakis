@@ -636,7 +636,7 @@
                                                                         through to the raw name on a neutral chip rather than rendering blank.
                                                                     -->
                                                                     <ItemsControl ItemsSource="{Binding Game.AgeRatings}"
-                                                                                  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,12,16,0">
+                                                                                  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,14,0" Panel.ZIndex="10">
                                                                         <ItemsControl.Style>
                                                                             <Style TargetType="ItemsControl">
                                                                                 <Setter Property="Visibility" Value="Visible" />
@@ -656,25 +656,25 @@
                                                                         <ItemsControl.ItemTemplate>
                                                                             <DataTemplate>
                                                                                 <Grid Margin="4,0,0,0">
-                                                                                    <Border x:Name="Pegi" Visibility="Collapsed" Width="26" Height="34" CornerRadius="3" Background="#4C9C2E">
+                                                                                    <Border x:Name="Pegi" Visibility="Collapsed" Width="42" Height="54" CornerRadius="4" Background="#4C9C2E">
                                                                                         <Grid>
-                                                                                            <Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="9" /></Grid.RowDefinitions>
-                                                                                            <TextBlock x:Name="PegiVal" Foreground="White" FontWeight="Bold" FontSize="16"
+                                                                                            <Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="13" /></Grid.RowDefinitions>
+                                                                                            <TextBlock x:Name="PegiVal" Foreground="White" FontWeight="Bold" FontSize="27"
                                                                                                        HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                                                                            <Border Grid.Row="1" Background="White" CornerRadius="0,0,3,3">
-                                                                                                <TextBlock x:Name="PegiTag" Text="PEGI" FontSize="6" FontWeight="Bold" Foreground="#4C9C2E"
+                                                                                            <Border Grid.Row="1" Background="White" CornerRadius="0,0,4,4">
+                                                                                                <TextBlock x:Name="PegiTag" Text="www.pegi.info" FontSize="5.5" FontWeight="Bold" Foreground="#4C9C2E"
                                                                                                            HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                                                             </Border>
                                                                                         </Grid>
                                                                                     </Border>
-                                                                                    <Border x:Name="Esrb" Visibility="Collapsed" Width="26" Height="34" CornerRadius="2"
-                                                                                            Background="White" BorderBrush="#111111" BorderThickness="1.5">
+                                                                                    <Border x:Name="Esrb" Visibility="Collapsed" Width="42" Height="54" CornerRadius="2"
+                                                                                            Background="White" BorderBrush="#111111" BorderThickness="2">
                                                                                         <Grid>
-                                                                                            <Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="10" /></Grid.RowDefinitions>
-                                                                                            <TextBlock x:Name="EsrbVal" Foreground="#111111" FontWeight="Bold" FontSize="15"
+                                                                                            <Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="14" /></Grid.RowDefinitions>
+                                                                                            <TextBlock x:Name="EsrbVal" Foreground="#111111" FontWeight="Bold" FontSize="24"
                                                                                                        HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                                                             <Border Grid.Row="1" Background="#111111">
-                                                                                                <TextBlock Text="ESRB" FontSize="6" FontWeight="Bold" Foreground="White"
+                                                                                                <TextBlock Text="ESRB" FontSize="8" FontWeight="Bold" Foreground="White"
                                                                                                            HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                                                             </Border>
                                                                                         </Grid>
