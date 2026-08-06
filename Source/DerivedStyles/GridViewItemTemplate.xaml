@@ -160,15 +160,14 @@
                                     means one Fill and one Stroke to set per status instead of
                                     juggling several elements.
 
-                                    Gold for played, then gems above it: emerald for beaten,
-                                    ruby for completed. Finishing a game is the achievement worth
-                                    rewarding, so the top two tiers outrank the metal rather than
-                                    continuing it. Flat single colours, not gradients, because a
-                                    multicoloured 28px icon reads as mud.
+                                    Only finishing earns a badge. Completed takes the trophy,
+                                    beaten takes the emerald. Played earns nothing: Playnite sets
+                                    it from playtime rather than from any decision, so it marks a
+                                    game as touched, not as achieved, and it shows the same hollow
+                                    ring as playing and on hold.
 
-                                    Playing and on hold are outlines: in progress, nothing earned.
-                                    Abandoned is a dulled grey. Nothing shows at all for not played,
-                                    plan to play, or no status: an empty shelf rather than a
+                                    Abandoned gets the gem, fractured. Not played, plan to play and
+                                    no status show nothing at all: an empty shelf rather than a
                                     participation award.
                                 -->
                                 <Grid Name="TrophyOverlay">
@@ -180,56 +179,40 @@
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <Viewbox Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                                        <Path Width="24" Height="24" Stretch="Uniform" Margin="6,6,8,8" StrokeThickness="1.4"
-                                              Data="M6,3 H18 V10 C18,13.3 15.3,16 12,16 C8.7,16 6,13.3 6,10 Z
-                                                    M11,16 H13 V19 H11 Z
-                                                    M7.5,19 H16.5 V21 H7.5 Z
-                                                    M6,4 H4 C2.3,4 1,5.3 1,7 C1,8.7 2.3,10 4,10 H6 V8.5 H4 C3.2,8.5 2.5,7.8 2.5,7 C2.5,6.2 3.2,5.5 4,5.5 H6 Z
-                                                    M18,4 H20 C21.7,4 23,5.3 23,7 C23,8.7 21.7,10 20,10 H18 V8.5 H20 C20.8,8.5 21.5,7.8 21.5,7 C21.5,6.2 20.8,5.5 20,5.5 H18 Z">
-                                            <Path.Style>
-                                                <Style TargetType="Path">
+                                        <Image Width="28" Height="28" RenderOptions.BitmapScalingMode="NearestNeighbor" Margin="6,6,10,10"
+                                               ToolTip="{Binding CompletionStatus.Name}">
+                                            <Image.Style>
+                                                <Style TargetType="Image">
                                                     <Setter Property="Visibility" Value="Collapsed" />
-                                                    <Setter Property="Effect">
-                                                        <Setter.Value>
-                                                            <DropShadowEffect BlurRadius="4" ShadowDepth="0" Opacity="0.8" Color="#000000" />
-                                                        </Setter.Value>
-                                                    </Setter>
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Playing">
                                                             <Setter Property="Visibility" Value="Visible" />
-                                                            <Setter Property="Fill" Value="#33FFFFFF" />
-                                                            <Setter Property="Stroke" Value="#F2F2F2" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="On Hold">
-                                                            <Setter Property="Visibility" Value="Visible" />
-                                                            <Setter Property="Fill" Value="#33FFFFFF" />
-                                                            <Setter Property="Stroke" Value="#F5A623" />
+                                                            <Setter Property="Source" Value="{DynamicResource BadgeProgressActive}" />
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Played">
                                                             <Setter Property="Visibility" Value="Visible" />
-                                                            <Setter Property="Fill" Value="#E9B824" />
-                                                            <Setter Property="Stroke" Value="#8A6508" />
+                                                            <Setter Property="Source" Value="{DynamicResource BadgeProgressActive}" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="On Hold">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                            <Setter Property="Source" Value="{DynamicResource BadgeProgressOnHold}" />
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Beaten">
                                                             <Setter Property="Visibility" Value="Visible" />
-                                                            <Setter Property="Fill" Value="#10B981" />
-                                                            <Setter Property="Stroke" Value="#0A6E4E" />
+                                                            <Setter Property="Source" Value="{DynamicResource BadgeBeaten}" />
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Completed">
                                                             <Setter Property="Visibility" Value="Visible" />
-                                                            <Setter Property="Fill" Value="#E0115F" />
-                                                            <Setter Property="Stroke" Value="#8A0A38" />
+                                                            <Setter Property="Source" Value="{DynamicResource BadgeCompleted}" />
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Abandoned">
                                                             <Setter Property="Visibility" Value="Visible" />
-                                                            <Setter Property="Fill" Value="#5A5F66" />
-                                                            <Setter Property="Stroke" Value="#3A3E44" />
-                                                            <Setter Property="Opacity" Value="0.75" />
+                                                            <Setter Property="Source" Value="{DynamicResource BadgeAbandoned}" />
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
-                                            </Path.Style>
-                                        </Path>
+                                            </Image.Style>
+                                        </Image>
                                     </Viewbox>
                                 </Grid>
 

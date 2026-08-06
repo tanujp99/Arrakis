@@ -2,6 +2,22 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:popt="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options">
 
+    <!--
+        Completion badges. 16x16 pixel art scaled to 256, drawn by
+        tools/make_badges.py so the art is reproducible from text rather than
+        arriving as opaque binaries.
+
+        Declared here, frozen, so one decoded image is shared by every tile
+        instead of each tile loading its own. NearestNeighbor keeps the pixels
+        square at any size; Fant would blur them into ordinary blobs, which is
+        the whole reason for pixel art on a high-DPI display.
+    -->
+    <BitmapImage x:Key="BadgeCompleted" UriSource="{ThemeFile 'Images/Badges/badge_completed.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
+    <BitmapImage x:Key="BadgeBeaten" UriSource="{ThemeFile 'Images/Badges/badge_beaten.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
+    <BitmapImage x:Key="BadgeAbandoned" UriSource="{ThemeFile 'Images/Badges/badge_abandoned.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
+    <BitmapImage x:Key="BadgeProgressActive" UriSource="{ThemeFile 'Images/Badges/progress_active.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
+    <BitmapImage x:Key="BadgeProgressOnHold" UriSource="{ThemeFile 'Images/Badges/progress_onhold.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
+
     <BitmapImage x:Key="TrayIcon" UriSource="{ThemeFile 'Images/applogo.ico'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
     <BitmapImage x:Key="TrayIconWhite" UriSource="{ThemeFile 'Images/applogo_black.ico'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
     <BitmapImage x:Key="TrayIconBlack" UriSource="{ThemeFile 'Images/applogo_white.ico'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
