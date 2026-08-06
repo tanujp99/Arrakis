@@ -27,6 +27,7 @@
         <sys:Boolean x:Key="GridViewGameCoverShowHighlightBorder">True</sys:Boolean>
         <Visibility x:Key="GridViewGameCoverShowCompletionStatus">Visible</Visibility>
         <Visibility x:Key="GridViewGameCoverShowPlayedTime">Visible</Visibility>
+        <Visibility x:Key="GridViewGameCoverShowUserScore">Visible</Visibility>
 
 
     <!--ThemeModifier Theme-->

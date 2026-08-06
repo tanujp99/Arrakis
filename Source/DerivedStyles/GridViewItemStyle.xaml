@@ -32,6 +32,7 @@
                                                 <Condition Binding="{Binding ElementName=GameName, Path=Visibility}" Value="Collapsed" />
                                                 <Condition Binding="{Binding ElementName=PlayingStatus, Path=Visibility}" Value="Collapsed" />
                                                 <Condition Binding="{Binding ElementName=PlayedTime, Path=Visibility}" Value="Collapsed" />
+                                                <Condition Binding="{Binding ElementName=UserScorePips, Path=Visibility}" Value="Collapsed" />
                                             </MultiDataTrigger.Conditions>
                                             <Setter Property="Visibility" Value="Collapsed" />
                                         </MultiDataTrigger>
@@ -41,6 +42,48 @@
                             <TextBlock x:Name="GameName" Text="{Binding DisplayName}" FontSize="{DynamicResource FontSizeSmall}" Style="{DynamicResource BaseTextBlockStyle}"
                                     TextAlignment="Left" TextTrimming="CharacterEllipsis" VerticalAlignment="Bottom" Width="{Settings GridItemWidth}"
                                     Visibility="{Settings ShowNamesUnderCovers}" Margin="0,0,0,4" />
+                            <!--
+                                My score, as six pips under the title.
+
+                                Deliberately not bucketed into the seven points.
+                                The filled row is a copy of the outline row clipped to a
+                                width proportional to the raw 0-100 UserScore, so a
+                                fine-tuned 72 renders as 4.3 pips rather than being
+                                rounded to 4. Bucketing would need range comparisons,
+                                which XAML cannot do without a converter.
+
+                                Both rows are one TextBlock of six glyphs at a fixed 84px,
+                                so the fill factor is a known 0.84 per point of score.
+                                Two elements rather than twelve: this template is
+                                instantiated per tile, so element count here is multiplied
+                                across the whole library.
+                            -->
+                            <Grid x:Name="UserScorePips" HorizontalAlignment="Left" Margin="0,0,0,4"
+                                  Tag="{DynamicResource GridViewGameCoverShowUserScore}">
+                                <Grid.Style>
+                                    <Style TargetType="Grid">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                        <Style.Triggers>
+                                            <!-- Unscored games show nothing rather than an empty row. -->
+                                            <DataTrigger Binding="{Binding UserScore}" Value="{x:Null}">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="Collapsed">
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+
+                                <TextBlock Text="&#xE734;&#xE734;&#xE734;&#xE734;&#xE734;&#xE734;" Width="84" Opacity="0.3"
+                                           Style="{StaticResource IconFontStyle}" FontSize="{DynamicResource FontSizeSmall}" />
+
+                                <Grid HorizontalAlignment="Left" ClipToBounds="True"
+                                      Width="{Binding UserScore, Converter={PluginConverter Plugin=ThemeExtras, Converter=MultiplyConverter}, ConverterParameter=0.84, FallbackValue=0}">
+                                    <TextBlock Text="&#xE735;&#xE735;&#xE735;&#xE735;&#xE735;&#xE735;" Width="84" HorizontalAlignment="Left"
+                                               Style="{StaticResource IconFontStyle}" FontSize="{DynamicResource FontSizeSmall}" />
+                                </Grid>
+                            </Grid>
                             <!--Time Played-->
                             <DockPanel x:Name="PlayedTime" Width="{Settings GridItemWidth}" Visibility="{DynamicResource GridViewGameCoverShowPlayedTime}" Margin="0,0,0,4">
                                 <TextBlock Text="&#xe121;" FontSize="{DynamicResource FontSizeSmall}" TextAlignment="Left" Margin="0,0,0,0"

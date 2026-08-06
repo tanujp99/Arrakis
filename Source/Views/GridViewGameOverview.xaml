@@ -464,8 +464,10 @@
                                                                             <Label Content="{DynamicResource LOCGameReleaseDateTitle}" />
                                                                             <Button Name="PART_ButtonReleaseDate" Margin="0,12,0,0" />
 
-                                                                            <Label Name="PART_ElemAgeRating" Content="{DynamicResource LOCAgeRatingLabel}" />
-                                                                            <ItemsControl Name="PART_ItemsAgeRatings" />
+                                                                            <!--
+                                                                                Age rating is not a row here. It renders as a mark at the
+                                                                                bottom of this card, below Tags.
+                                                                            -->
 
                                                                             <Label Name="PART_ElemRegion" Content="{DynamicResource LOCRegionLabel}" />
                                                                             <ItemsControl Name="PART_ItemsRegions" />
@@ -617,6 +619,102 @@
                                                                         </StackPanel>
 
                                                                     </StackPanel>
+
+                                                                    <!--
+                                                                        Age rating mark. Drawn rather than shipped as art: nothing
+                                                                        has to be sourced, it scales with the panel, and no
+                                                                        trademarked image file is redistributed in the package.
+                                                                        They are recognisable approximations, not the official marks.
+
+                                                                        The rating name cannot be split into system and value
+                                                                        without a converter, so each known rating sets its own text
+                                                                        and band colour explicitly. Anything unrecognised falls
+                                                                        through to the default: the raw name on a neutral band,
+                                                                        which is still readable rather than blank.
+                                                                    -->
+                                                                    <StackPanel Name="PART_ElemAgeRating">
+                                                                        <Separator Background="{StaticResource PanelSeparatorBrush}" Height="1" Margin="0,16,0,16" />
+                                                                        <ItemsControl Name="PART_ItemsAgeRatings">
+                                                                            <ItemsControl.ItemsPanel>
+                                                                                <ItemsPanelTemplate>
+                                                                                    <WrapPanel Orientation="Horizontal" />
+                                                                                </ItemsPanelTemplate>
+                                                                            </ItemsControl.ItemsPanel>
+                                                                            <ItemsControl.ItemTemplate>
+                                                                                <DataTemplate>
+                                                                                    <!-- Outer border is the colour band; the inner dark plate insets to leave a stripe. -->
+                                                                                    <Border x:Name="Band" CornerRadius="4" Height="40" Margin="0,0,8,4" Background="#6B7280">
+                                                                                        <Border Background="#1B1B1B" CornerRadius="3" Margin="5,0,0,0" Padding="8,0,10,0">
+                                                                                            <StackPanel VerticalAlignment="Center">
+                                                                                                <TextBlock x:Name="SysText" Text="RATED" Foreground="#B8B8B8" FontSize="8"
+                                                                                                           HorizontalAlignment="Center" Margin="0,0,0,1" />
+                                                                                                <TextBlock x:Name="ValText" Text="{Binding Name}" Foreground="White" FontSize="15"
+                                                                                                           FontWeight="Bold" HorizontalAlignment="Center" />
+                                                                                            </StackPanel>
+                                                                                        </Border>
+                                                                                    </Border>
+                                                                                    <DataTemplate.Triggers>
+                                                                                        <DataTrigger Binding="{Binding Name}" Value="PEGI 3">
+                                                                                            <Setter TargetName="SysText" Property="Text" Value="PEGI" />
+                                                                                            <Setter TargetName="ValText" Property="Text" Value="3" />
+                                                                                            <Setter TargetName="Band" Property="Background" Value="#4C9C2E" />
+                                                                                        </DataTrigger>
+                                                                                        <DataTrigger Binding="{Binding Name}" Value="PEGI 7">
+                                                                                            <Setter TargetName="SysText" Property="Text" Value="PEGI" />
+                                                                                            <Setter TargetName="ValText" Property="Text" Value="7" />
+                                                                                            <Setter TargetName="Band" Property="Background" Value="#4C9C2E" />
+                                                                                        </DataTrigger>
+                                                                                        <DataTrigger Binding="{Binding Name}" Value="PEGI 12">
+                                                                                            <Setter TargetName="SysText" Property="Text" Value="PEGI" />
+                                                                                            <Setter TargetName="ValText" Property="Text" Value="12" />
+                                                                                            <Setter TargetName="Band" Property="Background" Value="#F5A623" />
+                                                                                        </DataTrigger>
+                                                                                        <DataTrigger Binding="{Binding Name}" Value="PEGI 16">
+                                                                                            <Setter TargetName="SysText" Property="Text" Value="PEGI" />
+                                                                                            <Setter TargetName="ValText" Property="Text" Value="16" />
+                                                                                            <Setter TargetName="Band" Property="Background" Value="#F5A623" />
+                                                                                        </DataTrigger>
+                                                                                        <DataTrigger Binding="{Binding Name}" Value="PEGI 18">
+                                                                                            <Setter TargetName="SysText" Property="Text" Value="PEGI" />
+                                                                                            <Setter TargetName="ValText" Property="Text" Value="18" />
+                                                                                            <Setter TargetName="Band" Property="Background" Value="#D0021B" />
+                                                                                        </DataTrigger>
+                                                                                        <DataTrigger Binding="{Binding Name}" Value="ESRB E">
+                                                                                            <Setter TargetName="SysText" Property="Text" Value="ESRB" />
+                                                                                            <Setter TargetName="ValText" Property="Text" Value="E" />
+                                                                                            <Setter TargetName="Band" Property="Background" Value="#4C9C2E" />
+                                                                                        </DataTrigger>
+                                                                                        <DataTrigger Binding="{Binding Name}" Value="ESRB E10+">
+                                                                                            <Setter TargetName="SysText" Property="Text" Value="ESRB" />
+                                                                                            <Setter TargetName="ValText" Property="Text" Value="E10+" />
+                                                                                            <Setter TargetName="Band" Property="Background" Value="#4C9C2E" />
+                                                                                        </DataTrigger>
+                                                                                        <DataTrigger Binding="{Binding Name}" Value="ESRB T">
+                                                                                            <Setter TargetName="SysText" Property="Text" Value="ESRB" />
+                                                                                            <Setter TargetName="ValText" Property="Text" Value="T" />
+                                                                                            <Setter TargetName="Band" Property="Background" Value="#F5C518" />
+                                                                                        </DataTrigger>
+                                                                                        <DataTrigger Binding="{Binding Name}" Value="ESRB M">
+                                                                                            <Setter TargetName="SysText" Property="Text" Value="ESRB" />
+                                                                                            <Setter TargetName="ValText" Property="Text" Value="M" />
+                                                                                            <Setter TargetName="Band" Property="Background" Value="#D0021B" />
+                                                                                        </DataTrigger>
+                                                                                        <DataTrigger Binding="{Binding Name}" Value="ESRB AO">
+                                                                                            <Setter TargetName="SysText" Property="Text" Value="ESRB" />
+                                                                                            <Setter TargetName="ValText" Property="Text" Value="AO" />
+                                                                                            <Setter TargetName="Band" Property="Background" Value="#7A0010" />
+                                                                                        </DataTrigger>
+                                                                                        <DataTrigger Binding="{Binding Name}" Value="ESRB RP">
+                                                                                            <Setter TargetName="SysText" Property="Text" Value="ESRB" />
+                                                                                            <Setter TargetName="ValText" Property="Text" Value="RP" />
+                                                                                            <Setter TargetName="Band" Property="Background" Value="#6B7280" />
+                                                                                        </DataTrigger>
+                                                                                    </DataTemplate.Triggers>
+                                                                                </DataTemplate>
+                                                                            </ItemsControl.ItemTemplate>
+                                                                        </ItemsControl>
+                                                                    </StackPanel>
+
                                                                 </StackPanel>
                                                             </Grid>
 

@@ -25,5 +25,6 @@ Constants:
     - GridViewGameCoverShowHighlightBorder: 'Show luster on the border of game cover when selected'
     - GridViewGameCoverShowCompletionStatus: 'Display completion Status under game cover'
     - GridViewGameCoverShowPlayedTime: 'Display played time under game covers'
+    - GridViewGameCoverShowUserScore: 'Display my score as pips under game covers'
   
   

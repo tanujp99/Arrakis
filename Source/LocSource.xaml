@@ -1259,5 +1259,5 @@ Open new issue on Playnite's GitHub page with a request to fix corruption in you
 
     <!-- Arrakis additions. Not Playnite strings; the LOC prefix just matches the file's convention. -->
     <sys:String x:Key="LOCPlayStats">Play Stats</sys:String>
-    <sys:String x:Key="LOCScores">Scores</sys:String>
+    <sys:String x:Key="LOCScores">Rating</sys:String>
 </ResourceDictionary>
