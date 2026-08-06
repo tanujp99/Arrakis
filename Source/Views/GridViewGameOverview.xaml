@@ -651,11 +651,17 @@
                                                                             </Style>
                                                                         </ItemsControl.Style>
                                                                         <ItemsControl.ItemsPanel>
-                                                                            <ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate>
+                                                                            <!--
+                                            Vertical, so a second rating stacks below the first
+                                            rather than crowding the header. Playnite normally
+                                            stores only one, chosen by AgeRatingOrgPriority in its
+                                            config, so this usually renders a single mark.
+                                        -->
+                                        <ItemsPanelTemplate><StackPanel Orientation="Vertical" /></ItemsPanelTemplate>
                                                                         </ItemsControl.ItemsPanel>
                                                                         <ItemsControl.ItemTemplate>
                                                                             <DataTemplate>
-                                                                                <Grid Margin="4,0,0,0">
+                                                                                <Grid Margin="0,0,0,4">
                                                                                     <Border x:Name="Pegi" Visibility="Collapsed" Width="42" Height="54" CornerRadius="4" Background="#4C9C2E">
                                                                                         <Grid>
                                                                                             <Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="13" /></Grid.RowDefinitions>
