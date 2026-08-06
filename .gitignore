@@ -30,3 +30,27 @@ _ReSharper*/
 #Nuget packages folder
 packages/
 /.dotnet
+
+# --- Arrakis additions ---
+
+#Playnite runtime state, rewritten by the app on every theme load
+lastChanged.json
+#Packaged theme output
+*.pthm
+
+#Claude Code / AI tooling state
+.claude/
+CLAUDE.md
+CLAUDE.local.md
+.cursor/
+.aider*
+.mcp.json
+
+#Editor and OS cruft
+.vscode/
+.idea/
+*.code-workspace
+*.swp
+*~
+.DS_Store
+desktop.ini
