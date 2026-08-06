@@ -5,7 +5,7 @@
     <!--ThemeModifier Options-->
         <sys:Boolean x:Key="ThemeDarkStyle">False</sys:Boolean>
 
-        <sys:Double x:Key="GameOverviewWidth">1024</sys:Double>
+        <sys:Double x:Key="GameOverviewWidth">480</sys:Double>
         <sys:Double x:Key="GameDetailInfoWidth">1024</sys:Double>
 
         <sys:Boolean x:Key="GridViewImageCoverUseRoundedCorners">True</sys:Boolean>
@@ -21,6 +21,7 @@
         <!--ThemeModifier Grid View Settings-->
         <sys:Boolean x:Key="GridViewGameCoverUseRoundedCorners">True</sys:Boolean>
         <sys:Boolean x:Key="GridViewGameCoverShowPlatformBanner">True</sys:Boolean>
+		<sys:Double x:Key="PlatformBannerHeight">40</sys:Double>
         <sys:Boolean x:Key="GridViewGameCoverShowFavorite">True</sys:Boolean>
         <sys:Boolean x:Key="GridViewGameCoverShowShineAnimation">True</sys:Boolean>
         <sys:Boolean x:Key="GridViewGameCoverShowHighlightBorder">True</sys:Boolean>

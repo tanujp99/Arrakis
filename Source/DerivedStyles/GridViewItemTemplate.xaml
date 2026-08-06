@@ -31,7 +31,19 @@
                         <StackPanel Name="PART_PanelHost"
                                     d:DataContext="{x:Static DesignMainViewModel.DesignSelectedGameIntance}">
 
-                            <Grid Width="{Settings GridItemWidth}"  Height="{Settings GridItemHeight}">
+                            <Grid x:Name="TileContainer" Width="{Settings GridItemWidth}"
+								  ClipToBounds="True"
+								  Tag="{DynamicResource GridViewGameCoverShowPlatformBanner}">
+								<Grid.Style>
+									<Style TargetType="Grid">
+										<Setter Property="Height" Value="{Binding Width, RelativeSource={RelativeSource Self}}" />
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource Self}}" Value="True">
+												<Setter Property="Height" Value="{Binding Width, RelativeSource={RelativeSource Self}, Converter={PluginConverter Plugin=ThemeExtras, Converter=MultiplyConverter}, ConverterParameter=1.1665}" />
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</Grid.Style>
 
                                 <Border Style="{StaticResource VisualBrushBorderMask}" Name="Mask" Tag="{DynamicResource GridViewGameCoverUseRoundedCorners}">
                                     <TextBlock x:Name="ThemeSwitchBorderMask" Visibility="Collapsed" Tag="{DynamicResource ThemeDarkStyle}" />
@@ -51,13 +63,19 @@
                                             </Style.Triggers>
                                         </Style>
                                     </StackPanel.Style>
-                                    <!--<ContentControl x:Name="ThemeExtras_Banner" RenderOptions.BitmapScalingMode="Fant" Width="{Binding Width, ElementName=PART_ImageCover}"
-                                            Tag="{DynamicResource GridViewGameCoverShowPlatformBanner}" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center"
-                                            Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}" />-->
-                                    <Grid>
-                                        <Image Name="PART_ImageCover" Height="{Settings GridItemHeight}" SnapsToDevicePixels="True" HorizontalAlignment="Center"
+                                    <Grid Height="{Binding ActualHeight, ElementName=TileContainer}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <ContentControl x:Name="ThemeExtras_Banner" Grid.Row="0" RenderOptions.BitmapScalingMode="Fant"
+                                                Width="{Settings GridItemWidth}"
+                                                VerticalAlignment="Top" HorizontalAlignment="Center"
+                                                Tag="{DynamicResource GridViewGameCoverShowPlatformBanner}"
+                                                Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        <Image Name="PART_ImageCover" Grid.Row="1" SnapsToDevicePixels="True" HorizontalAlignment="Center"
                                                 VerticalAlignment="Center" RenderOptions.BitmapScalingMode="Fant" StretchDirection="Both" Stretch="{Settings CoverArtStretch}" />
-                                        <Grid Tag="{DynamicResource GridViewGameCoverShowFavorite}"
+                                        <Grid Grid.RowSpan="2" Tag="{DynamicResource GridViewGameCoverShowFavorite}"
                                                 Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource BooleanToVisibilityConverter}}">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />

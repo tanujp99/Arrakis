@@ -9,7 +9,7 @@ Constants:
     - DarkWindowBackgroundBrush: 'Dark theme background color'
 
     - "Layouts"
-    - GameOverviewWidth(1024,2400): 'Maximum width of overview'
+    - GameOverviewWidth(360,2400): 'Maximum width of overview'
     - GameDetailInfoWidth(200,800): 'Maximum width of details'
   
     - "General Settings"
@@ -19,6 +19,7 @@ Constants:
   
     - GridViewGameCoverShowFavorite: 'Show favorite icon on game cover'
     - GridViewGameCoverShowPlatformBanner: 'Show platform banners ("ThemeExtras" extension needed)'
+    - PlatformBannerHeight(12,120): 'Platform banner height (how much of the cover it covers)'
     - GridViewGameCoverUseRoundedCorners: 'Use rounded corners on game covers'
     - GridViewGameCoverShowShineAnimation: 'Show luster on game cover when hover'
     - GridViewGameCoverShowHighlightBorder: 'Show luster on the border of game cover when selected'
