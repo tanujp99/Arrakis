@@ -620,21 +620,25 @@
 
                                                                     </StackPanel>
 
+                                                                </StackPanel>
                                                                     <!--
-                                                                        Age rating mark. Drawn rather than shipped as art: nothing
-                                                                        has to be sourced, it scales with the panel, and no
-                                                                        trademarked image file is redistributed in the package.
-                                                                        They are recognisable approximations, not the official marks.
-
-                                                                        The rating name cannot be split into system and value
-                                                                        without a converter, so each known rating sets its own text
-                                                                        and band colour explicitly. Anything unrecognised falls
-                                                                        through to the default: the raw name on a neutral band,
-                                                                        which is still readable rather than blank.
+                                                                        Age rating mark, pinned to this card's top-right corner so it costs
+                                                                        no vertical space and sits beside the Details header.
+                                                                    
+                                                                        Drawn rather than shipped as art: nothing to source, it scales, and
+                                                                        no trademarked image file is redistributed in the package. PEGI is a
+                                                                        solid colour block with a white number over a white strip; ESRB is a
+                                                                        white box with a black band. They are recognisable approximations.
+                                                                    
+                                                                        The rating name cannot be split into system and value without a
+                                                                        converter, so each known rating sets its own text and colour, and
+                                                                        picks which of the two marks to show. Anything unrecognised falls
+                                                                        through to the raw name on a neutral chip rather than rendering blank.
                                                                     -->
-                                                                    <StackPanel Name="PART_ElemAgeRating">
-                                                                        <StackPanel.Style>
-                                                                            <Style TargetType="StackPanel">
+                                                                    <ItemsControl ItemsSource="{Binding Game.AgeRatings}"
+                                                                                  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,12,16,0">
+                                                                        <ItemsControl.Style>
+                                                                            <Style TargetType="ItemsControl">
                                                                                 <Setter Property="Visibility" Value="Visible" />
                                                                                 <Style.Triggers>
                                                                                     <DataTrigger Binding="{Settings DetailsVisibility.AgeRating}" Value="False">
@@ -645,98 +649,116 @@
                                                                                     </DataTrigger>
                                                                                 </Style.Triggers>
                                                                             </Style>
-                                                                        </StackPanel.Style>
-                                                                        <Separator Background="{StaticResource PanelSeparatorBrush}" Height="1" Margin="0,16,0,16" />
-                                                                        <!--
-                                                                            Bound to Game.AgeRatings directly rather than through
-                                                                            PART_ItemsAgeRatings. Playnite configures its PART_Items*
-                                                                            controls itself, template included, so an ItemTemplate set
-                                                                            here is discarded and the ratings render as plain text.
-                                                                            Binding by hand costs the automatic collapse, which the
-                                                                            triggers above restore.
-                                                                        -->
-                                                                        <ItemsControl ItemsSource="{Binding Game.AgeRatings}">
-                                                                            <ItemsControl.ItemsPanel>
-                                                                                <ItemsPanelTemplate>
-                                                                                    <WrapPanel Orientation="Horizontal" />
-                                                                                </ItemsPanelTemplate>
-                                                                            </ItemsControl.ItemsPanel>
-                                                                            <ItemsControl.ItemTemplate>
-                                                                                <DataTemplate>
-                                                                                    <!-- Outer border is the colour band; the inner dark plate insets to leave a stripe. -->
-                                                                                    <Border x:Name="Band" CornerRadius="4" Height="40" Margin="0,0,8,4" Background="#6B7280">
-                                                                                        <Border Background="#1B1B1B" CornerRadius="3" Margin="5,0,0,0" Padding="8,0,10,0">
-                                                                                            <StackPanel VerticalAlignment="Center">
-                                                                                                <TextBlock x:Name="SysText" Text="RATED" Foreground="#B8B8B8" FontSize="8"
-                                                                                                           HorizontalAlignment="Center" Margin="0,0,0,1" />
-                                                                                                <TextBlock x:Name="ValText" Text="{Binding Name}" Foreground="White" FontSize="15"
-                                                                                                           FontWeight="Bold" HorizontalAlignment="Center" />
-                                                                                            </StackPanel>
-                                                                                        </Border>
+                                                                        </ItemsControl.Style>
+                                                                        <ItemsControl.ItemsPanel>
+                                                                            <ItemsPanelTemplate><StackPanel Orientation="Horizontal" /></ItemsPanelTemplate>
+                                                                        </ItemsControl.ItemsPanel>
+                                                                        <ItemsControl.ItemTemplate>
+                                                                            <DataTemplate>
+                                                                                <Grid Margin="4,0,0,0">
+                                                                                    <Border x:Name="Pegi" Visibility="Collapsed" Width="26" Height="34" CornerRadius="3" Background="#4C9C2E">
+                                                                                        <Grid>
+                                                                                            <Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="9" /></Grid.RowDefinitions>
+                                                                                            <TextBlock x:Name="PegiVal" Foreground="White" FontWeight="Bold" FontSize="16"
+                                                                                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                            <Border Grid.Row="1" Background="White" CornerRadius="0,0,3,3">
+                                                                                                <TextBlock x:Name="PegiTag" Text="PEGI" FontSize="6" FontWeight="Bold" Foreground="#4C9C2E"
+                                                                                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                            </Border>
+                                                                                        </Grid>
                                                                                     </Border>
-                                                                                    <DataTemplate.Triggers>
-                                                                                        <DataTrigger Binding="{Binding Name}" Value="PEGI 3">
-                                                                                            <Setter TargetName="SysText" Property="Text" Value="PEGI" />
-                                                                                            <Setter TargetName="ValText" Property="Text" Value="3" />
-                                                                                            <Setter TargetName="Band" Property="Background" Value="#4C9C2E" />
-                                                                                        </DataTrigger>
-                                                                                        <DataTrigger Binding="{Binding Name}" Value="PEGI 7">
-                                                                                            <Setter TargetName="SysText" Property="Text" Value="PEGI" />
-                                                                                            <Setter TargetName="ValText" Property="Text" Value="7" />
-                                                                                            <Setter TargetName="Band" Property="Background" Value="#4C9C2E" />
-                                                                                        </DataTrigger>
-                                                                                        <DataTrigger Binding="{Binding Name}" Value="PEGI 12">
-                                                                                            <Setter TargetName="SysText" Property="Text" Value="PEGI" />
-                                                                                            <Setter TargetName="ValText" Property="Text" Value="12" />
-                                                                                            <Setter TargetName="Band" Property="Background" Value="#F5A623" />
-                                                                                        </DataTrigger>
-                                                                                        <DataTrigger Binding="{Binding Name}" Value="PEGI 16">
-                                                                                            <Setter TargetName="SysText" Property="Text" Value="PEGI" />
-                                                                                            <Setter TargetName="ValText" Property="Text" Value="16" />
-                                                                                            <Setter TargetName="Band" Property="Background" Value="#F5A623" />
-                                                                                        </DataTrigger>
-                                                                                        <DataTrigger Binding="{Binding Name}" Value="PEGI 18">
-                                                                                            <Setter TargetName="SysText" Property="Text" Value="PEGI" />
-                                                                                            <Setter TargetName="ValText" Property="Text" Value="18" />
-                                                                                            <Setter TargetName="Band" Property="Background" Value="#D0021B" />
-                                                                                        </DataTrigger>
-                                                                                        <DataTrigger Binding="{Binding Name}" Value="ESRB E">
-                                                                                            <Setter TargetName="SysText" Property="Text" Value="ESRB" />
-                                                                                            <Setter TargetName="ValText" Property="Text" Value="E" />
-                                                                                            <Setter TargetName="Band" Property="Background" Value="#4C9C2E" />
-                                                                                        </DataTrigger>
-                                                                                        <DataTrigger Binding="{Binding Name}" Value="ESRB E10+">
-                                                                                            <Setter TargetName="SysText" Property="Text" Value="ESRB" />
-                                                                                            <Setter TargetName="ValText" Property="Text" Value="E10+" />
-                                                                                            <Setter TargetName="Band" Property="Background" Value="#4C9C2E" />
-                                                                                        </DataTrigger>
-                                                                                        <DataTrigger Binding="{Binding Name}" Value="ESRB T">
-                                                                                            <Setter TargetName="SysText" Property="Text" Value="ESRB" />
-                                                                                            <Setter TargetName="ValText" Property="Text" Value="T" />
-                                                                                            <Setter TargetName="Band" Property="Background" Value="#F5C518" />
-                                                                                        </DataTrigger>
-                                                                                        <DataTrigger Binding="{Binding Name}" Value="ESRB M">
-                                                                                            <Setter TargetName="SysText" Property="Text" Value="ESRB" />
-                                                                                            <Setter TargetName="ValText" Property="Text" Value="M" />
-                                                                                            <Setter TargetName="Band" Property="Background" Value="#D0021B" />
-                                                                                        </DataTrigger>
-                                                                                        <DataTrigger Binding="{Binding Name}" Value="ESRB AO">
-                                                                                            <Setter TargetName="SysText" Property="Text" Value="ESRB" />
-                                                                                            <Setter TargetName="ValText" Property="Text" Value="AO" />
-                                                                                            <Setter TargetName="Band" Property="Background" Value="#7A0010" />
-                                                                                        </DataTrigger>
-                                                                                        <DataTrigger Binding="{Binding Name}" Value="ESRB RP">
-                                                                                            <Setter TargetName="SysText" Property="Text" Value="ESRB" />
-                                                                                            <Setter TargetName="ValText" Property="Text" Value="RP" />
-                                                                                            <Setter TargetName="Band" Property="Background" Value="#6B7280" />
-                                                                                        </DataTrigger>
-                                                                                    </DataTemplate.Triggers>
-                                                                                </DataTemplate>
-                                                                            </ItemsControl.ItemTemplate>
-                                                                        </ItemsControl>
-                                                                    </StackPanel>
+                                                                                    <Border x:Name="Esrb" Visibility="Collapsed" Width="26" Height="34" CornerRadius="2"
+                                                                                            Background="White" BorderBrush="#111111" BorderThickness="1.5">
+                                                                                        <Grid>
+                                                                                            <Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="10" /></Grid.RowDefinitions>
+                                                                                            <TextBlock x:Name="EsrbVal" Foreground="#111111" FontWeight="Bold" FontSize="15"
+                                                                                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                            <Border Grid.Row="1" Background="#111111">
+                                                                                                <TextBlock Text="ESRB" FontSize="6" FontWeight="Bold" Foreground="White"
+                                                                                                           HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                                                            </Border>
+                                                                                        </Grid>
+                                                                                    </Border>
+                                                                                    <Border x:Name="Fallback" Height="20" CornerRadius="3" Background="#6B7280" Padding="6,0,6,0">
+                                                                                        <TextBlock Text="{Binding Name}" Foreground="White" FontSize="10" VerticalAlignment="Center" />
+                                                                                    </Border>
+                                                                                </Grid>
+                                                                                <DataTemplate.Triggers>
+                                                                                    <DataTrigger Binding="{Binding Name}" Value="PEGI 3">
+                                                                                        <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
+                                                                                        <Setter TargetName="Pegi" Property="Visibility" Value="Visible" />
+                                                                                        <Setter TargetName="Pegi" Property="Background" Value="#4C9C2E" />
+                                                                                        <Setter TargetName="PegiVal" Property="Text" Value="3" />
+                                                                                        <Setter TargetName="PegiTag" Property="Foreground" Value="#4C9C2E" />
+                                                                                    </DataTrigger>
+                                                                                    <DataTrigger Binding="{Binding Name}" Value="PEGI 7">
+                                                                                        <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
+                                                                                        <Setter TargetName="Pegi" Property="Visibility" Value="Visible" />
+                                                                                        <Setter TargetName="Pegi" Property="Background" Value="#4C9C2E" />
+                                                                                        <Setter TargetName="PegiVal" Property="Text" Value="7" />
+                                                                                        <Setter TargetName="PegiTag" Property="Foreground" Value="#4C9C2E" />
+                                                                                    </DataTrigger>
+                                                                                    <DataTrigger Binding="{Binding Name}" Value="PEGI 12">
+                                                                                        <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
+                                                                                        <Setter TargetName="Pegi" Property="Visibility" Value="Visible" />
+                                                                                        <Setter TargetName="Pegi" Property="Background" Value="#F5A623" />
+                                                                                        <Setter TargetName="PegiVal" Property="Text" Value="12" />
+                                                                                        <Setter TargetName="PegiTag" Property="Foreground" Value="#F5A623" />
+                                                                                    </DataTrigger>
+                                                                                    <DataTrigger Binding="{Binding Name}" Value="PEGI 16">
+                                                                                        <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
+                                                                                        <Setter TargetName="Pegi" Property="Visibility" Value="Visible" />
+                                                                                        <Setter TargetName="Pegi" Property="Background" Value="#F5A623" />
+                                                                                        <Setter TargetName="PegiVal" Property="Text" Value="16" />
+                                                                                        <Setter TargetName="PegiTag" Property="Foreground" Value="#F5A623" />
+                                                                                    </DataTrigger>
+                                                                                    <DataTrigger Binding="{Binding Name}" Value="PEGI 18">
+                                                                                        <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
+                                                                                        <Setter TargetName="Pegi" Property="Visibility" Value="Visible" />
+                                                                                        <Setter TargetName="Pegi" Property="Background" Value="#D0021B" />
+                                                                                        <Setter TargetName="PegiVal" Property="Text" Value="18" />
+                                                                                        <Setter TargetName="PegiTag" Property="Foreground" Value="#D0021B" />
+                                                                                    </DataTrigger>
+                                                                                    <DataTrigger Binding="{Binding Name}" Value="ESRB EC">
+                                                                                        <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
+                                                                                        <Setter TargetName="Esrb" Property="Visibility" Value="Visible" />
+                                                                                        <Setter TargetName="EsrbVal" Property="Text" Value="EC" />
+                                                                                    </DataTrigger>
+                                                                                    <DataTrigger Binding="{Binding Name}" Value="ESRB E">
+                                                                                        <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
+                                                                                        <Setter TargetName="Esrb" Property="Visibility" Value="Visible" />
+                                                                                        <Setter TargetName="EsrbVal" Property="Text" Value="E" />
+                                                                                    </DataTrigger>
+                                                                                    <DataTrigger Binding="{Binding Name}" Value="ESRB E10+">
+                                                                                        <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
+                                                                                        <Setter TargetName="Esrb" Property="Visibility" Value="Visible" />
+                                                                                        <Setter TargetName="EsrbVal" Property="Text" Value="E10+" />
+                                                                                    </DataTrigger>
+                                                                                    <DataTrigger Binding="{Binding Name}" Value="ESRB T">
+                                                                                        <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
+                                                                                        <Setter TargetName="Esrb" Property="Visibility" Value="Visible" />
+                                                                                        <Setter TargetName="EsrbVal" Property="Text" Value="T" />
+                                                                                    </DataTrigger>
+                                                                                    <DataTrigger Binding="{Binding Name}" Value="ESRB M">
+                                                                                        <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
+                                                                                        <Setter TargetName="Esrb" Property="Visibility" Value="Visible" />
+                                                                                        <Setter TargetName="EsrbVal" Property="Text" Value="M" />
+                                                                                    </DataTrigger>
+                                                                                    <DataTrigger Binding="{Binding Name}" Value="ESRB AO">
+                                                                                        <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
+                                                                                        <Setter TargetName="Esrb" Property="Visibility" Value="Visible" />
+                                                                                        <Setter TargetName="EsrbVal" Property="Text" Value="AO" />
+                                                                                    </DataTrigger>
+                                                                                    <DataTrigger Binding="{Binding Name}" Value="ESRB RP">
+                                                                                        <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
+                                                                                        <Setter TargetName="Esrb" Property="Visibility" Value="Visible" />
+                                                                                        <Setter TargetName="EsrbVal" Property="Text" Value="RP" />
+                                                                                    </DataTrigger>
+                                                                                </DataTemplate.Triggers>
+                                                                            </DataTemplate>
+                                                                        </ItemsControl.ItemTemplate>
+                                                                    </ItemsControl>
 
-                                                                </StackPanel>
                                                             </Grid>
 
                                                         </StackPanel>
