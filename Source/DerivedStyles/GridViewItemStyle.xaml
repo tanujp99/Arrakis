@@ -105,8 +105,40 @@
                                         </Style.Triggers>
                                     </Style>
                                 </DockPanel.Style>
-                                <TextBlock Text="&#xe129;" FontSize="{DynamicResource FontSizeSmall}" TextAlignment="Left" Margin="0,0,0,0"
-                                           Style="{StaticResource IconFontStyle}" />
+                                <!-- Same glyph vocabulary as the hero trophy, so the two read as one thing. -->
+                                <TextBlock FontSize="{DynamicResource FontSizeSmall}" TextAlignment="Left" Margin="0,0,0,0">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock" BasedOn="{StaticResource IconFontStyle}">
+                                            <Setter Property="Text" Value="&#xE9F9;" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Not Played">
+                                                    <Setter Property="Text" Value="&#xE738;" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Plan to Play">
+                                                    <Setter Property="Text" Value="&#xE787;" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Playing">
+                                                    <Setter Property="Text" Value="&#xE768;" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="On Hold">
+                                                    <Setter Property="Text" Value="&#xE769;" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Played">
+                                                    <Setter Property="Text" Value="&#xE73E;" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Beaten">
+                                                    <Setter Property="Text" Value="&#xE8FB;" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Completed">
+                                                    <Setter Property="Text" Value="&#xE735;" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Abandoned">
+                                                    <Setter Property="Text" Value="&#xE711;" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
 
                                 <TextBlock x:Name="CompletionStatusName" Text="{Binding CompletionStatus.Name, Mode=OneWay, IsAsync=True}" TextAlignment="Left"
                                            TextTrimming="CharacterEllipsis" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}" 

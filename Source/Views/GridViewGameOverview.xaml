@@ -814,8 +814,9 @@
                                                                         <Label Name="PART_ElemAdded" Content="{DynamicResource LOCDateAddedLabel}" />
                                                                         <TextBlock Name="PART_TextAdded" Margin="0,12,0,0" />
 
+                                                                        <!-- Plain text: the wired button now lives in the hero as the trophy. -->
                                                                         <Label Name="PART_ElemCompletionStatus" Content="{DynamicResource LOCCompletionStatus}" />
-                                                                        <Button Name="PART_ButtonCompletionStatus" Margin="0,12,0,0" />
+                                                                        <TextBlock Text="{Binding Game.CompletionStatus.Name}" Margin="0,12,0,0" />
 
                                                                         <Label Content="{DynamicResource LOCSuccessStoryAchievements}" />
                                                                         <StackPanel Name="PART_SuccessStory" Orientation="Horizontal" Margin="0,12,0,0">
@@ -992,8 +993,59 @@
 
                                 </DockPanel>
                                 
-                                <!--Panel Close + Edit Buttons-->
+                                <!--Completion status + Panel Close + Edit Buttons-->
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="16,16,16,0">
+                                    <!--
+                                        The completion trophy, and the only control on this
+                                        panel that writes anything. PART_ButtonCompletionStatus
+                                        carries Playnite's command to open the status picker and
+                                        keeps it through any restyling, so status is one click
+                                        away instead of a trip through Edit Game Details.
+
+                                        The name is used here rather than in the Play Stats card
+                                        because Playnite wires a single element per PART_ name;
+                                        the card shows the status as plain text.
+
+                                        Glyph is chosen per status. Statuses are user-editable in
+                                        Playnite, so anything unrecognised keeps the neutral
+                                        default rather than rendering an empty button.
+                                    -->
+                                    <Button x:Name="PART_ButtonCompletionStatus" Focusable="False"
+                                            Width="32" Height="32" Margin="0,0,8,0"
+                                            Background="{DynamicResource ControlIdleBackgroundBrush}"
+                                            ToolTip="{Binding Game.CompletionStatus.Name}">
+                                        <Button.Style>
+                                            <Style TargetType="Button" BasedOn="{StaticResource IconfontButton}">
+                                                <Setter Property="Content" Value="&#xE9F9;" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Not Played">
+                                                        <Setter Property="Content" Value="&#xE738;" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Plan to Play">
+                                                        <Setter Property="Content" Value="&#xE787;" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Playing">
+                                                        <Setter Property="Content" Value="&#xE768;" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="On Hold">
+                                                        <Setter Property="Content" Value="&#xE769;" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Played">
+                                                        <Setter Property="Content" Value="&#xE73E;" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Beaten">
+                                                        <Setter Property="Content" Value="&#xE8FB;" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Completed">
+                                                        <Setter Property="Content" Value="&#xE735;" />
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Abandoned">
+                                                        <Setter Property="Content" Value="&#xE711;" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
                                     <Button x:Name="PART_ButtonEditGame" Focusable="False"
                                             Content="&#xe713;"
                                             Width="32" Height="32"
