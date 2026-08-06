@@ -1,23 +1,23 @@
 AddonId: Arrakis_0dcd3f68-cfaa-4bff-824b-165da182d09e
 Type: ThemeDesktop
-InstallerManifestUrl: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/main/Manifest/Installer_Manifest.yaml
+InstallerManifestUrl: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/master/Manifest/Installer_Manifest.yaml
 Name: Arrakis
 Author: tanuj
 SourceUrl: https://github.com/tanujp99/Arrakis
 ShortDescription: A catalog-first fork of Dune for Playnite Desktop Mode.
 Description: A fork of sakasaki's Dune theme, reshaped for using Playnite as a catalog of owned games rather than as a launcher. The grid view overview panel is a single narrow column of cards -- Play Stats, Details and How Long To Beat -- with the play, install and context actions removed. Grid tiles can carry eShop-style platform banners via the ThemeExtras plugin. Keeps Dune's light and dark modes intact.
 Tags: ["Theme", "Light", "Clean", "Catalog"]
-IconUrl: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/main/Source/Images/applogo.png
+IconUrl: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/master/Source/Images/applogo.png
 Links:
     GitHub: https://github.com/tanujp99/Arrakis
     Issues Tracker: https://github.com/tanujp99/Arrakis/issues
     Upstream (Dune): https://github.com/sakasakiking/Dune
 Screenshots:
-    - Thumbnail: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/main/Screenshots/Thumb_01.jpg
-      Image: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/main/Screenshots/Screenshots01.jpg
-    - Thumbnail: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/main/Screenshots/Thumb_02.jpg
-      Image: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/main/Screenshots/Screenshots02.jpg
-    - Thumbnail: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/main/Screenshots/Thumb_03.jpg
-      Image: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/main/Screenshots/Screenshots03.jpg
-    - Thumbnail: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/main/Screenshots/Thumb_04.jpg
-      Image: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/main/Screenshots/Screenshots04.jpg
+    - Thumbnail: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/master/Screenshots/Thumb_01.jpg
+      Image: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/master/Screenshots/Screenshots01.jpg
+    - Thumbnail: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/master/Screenshots/Thumb_02.jpg
+      Image: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/master/Screenshots/Screenshots02.jpg
+    - Thumbnail: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/master/Screenshots/Thumb_03.jpg
+      Image: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/master/Screenshots/Screenshots03.jpg
+    - Thumbnail: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/master/Screenshots/Thumb_04.jpg
+      Image: https://raw.githubusercontent.com/tanujp99/Arrakis/refs/heads/master/Screenshots/Screenshots04.jpg
