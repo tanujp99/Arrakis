@@ -1023,57 +1023,63 @@
                                 
                                 <!--Completion status + Panel Close + Edit Buttons-->
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="16,16,16,0">
-                                    <!--
-                                        The completion trophy, and the only control on this
-                                        panel that writes anything. PART_ButtonCompletionStatus
-                                        carries Playnite's command to open the status picker and
-                                        keeps it through any restyling, so status is one click
-                                        away instead of a trip through Edit Game Details.
+                                                                        <!--
+                                        Completion trophy, display only. PART_ButtonCompletionStatus
+                                        was tried here first on the assumption that a wired button
+                                        would let the status be edited; it does not. Playnite's
+                                        PART_Button* controls raise filters, so clicking it filtered
+                                        the library by completion status rather than opening a picker.
+                                        Nothing in a theme can set this field.
 
-                                        The name is used here rather than in the Play Stats card
-                                        because Playnite wires a single element per PART_ name;
-                                        the card shows the status as plain text.
-
-                                        Glyph is chosen per status. Statuses are user-editable in
-                                        Playnite, so anything unrecognised keeps the neutral
-                                        default rather than rendering an empty button.
+                                        Same drawn trophy and the same metal tiers as the grid tiles,
+                                        so the panel and the library agree.
                                     -->
-                                    <Button x:Name="PART_ButtonCompletionStatus" Focusable="False"
-                                            Width="32" Height="32" Margin="0,0,8,0"
-                                            Background="{DynamicResource ControlIdleBackgroundBrush}"
-                                            ToolTip="{Binding Game.CompletionStatus.Name}">
-                                        <Button.Style>
-                                            <Style TargetType="Button" BasedOn="{StaticResource IconfontButton}">
-                                                <Setter Property="Content" Value="&#xE9F9;" />
+                                    <Path Width="22" Height="22" Stretch="Uniform" Margin="0,5,10,0" StrokeThickness="1.4"
+                                          VerticalAlignment="Center"
+                                          ToolTip="{Binding Game.CompletionStatus.Name}"
+                                          Data="M6,3 H18 V10 C18,13.3 15.3,16 12,16 C8.7,16 6,13.3 6,10 Z
+                                                M11,16 H13 V19 H11 Z
+                                                M7.5,19 H16.5 V21 H7.5 Z
+                                                M6,4 H4 C2.3,4 1,5.3 1,7 C1,8.7 2.3,10 4,10 H6 V8.5 H4 C3.2,8.5 2.5,7.8 2.5,7 C2.5,6.2 3.2,5.5 4,5.5 H6 Z
+                                                M18,4 H20 C21.7,4 23,5.3 23,7 C23,8.7 21.7,10 20,10 H18 V8.5 H20 C20.8,8.5 21.5,7.8 21.5,7 C21.5,6.2 20.8,5.5 20,5.5 H18 Z">
+                                        <Path.Style>
+                                            <Style TargetType="Path">
+                                                <Setter Property="Visibility" Value="Collapsed" />
                                                 <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Not Played">
-                                                        <Setter Property="Content" Value="&#xE738;" />
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Plan to Play">
-                                                        <Setter Property="Content" Value="&#xE787;" />
-                                                    </DataTrigger>
                                                     <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Playing">
-                                                        <Setter Property="Content" Value="&#xE768;" />
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                        <Setter Property="Fill" Value="#33FFFFFF" />
+                                                        <Setter Property="Stroke" Value="#F2F2F2" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="On Hold">
-                                                        <Setter Property="Content" Value="&#xE769;" />
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                        <Setter Property="Fill" Value="#33FFFFFF" />
+                                                        <Setter Property="Stroke" Value="#F5A623" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Played">
-                                                        <Setter Property="Content" Value="&#xE73E;" />
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                        <Setter Property="Fill" Value="#B87333" />
+                                                        <Setter Property="Stroke" Value="#7A4A20" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Beaten">
-                                                        <Setter Property="Content" Value="&#xE8FB;" />
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                        <Setter Property="Fill" Value="#C8CDD4" />
+                                                        <Setter Property="Stroke" Value="#8A9099" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Completed">
-                                                        <Setter Property="Content" Value="&#xE735;" />
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                        <Setter Property="Fill" Value="#F2C230" />
+                                                        <Setter Property="Stroke" Value="#A67C0B" />
                                                     </DataTrigger>
                                                     <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Abandoned">
-                                                        <Setter Property="Content" Value="&#xE711;" />
+                                                        <Setter Property="Visibility" Value="Visible" />
+                                                        <Setter Property="Fill" Value="#5A5F66" />
+                                                        <Setter Property="Stroke" Value="#3A3E44" />
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
-                                        </Button.Style>
-                                    </Button>
+                                        </Path.Style>
+                                    </Path>
                                     <Button x:Name="PART_ButtonEditGame" Focusable="False"
                                             Content="&#xe713;"
                                             Width="32" Height="32"
