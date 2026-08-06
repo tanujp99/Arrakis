@@ -495,7 +495,7 @@
                                                                                 card's implicit Label style and lose the shared margins
                                                                                 and opacity.
                                                                             -->
-                                                                            <Label Content="{DynamicResource LOCScores}"
+                                                                            <Label Content="Rating"
                                                                                    Visibility="{Binding ElementName=ScoreRow, Path=Visibility}" />
                                                                             <StackPanel x:Name="ScoreRow" Orientation="Horizontal">
                                                                                 <StackPanel.Style>
@@ -633,8 +633,29 @@
                                                                         which is still readable rather than blank.
                                                                     -->
                                                                     <StackPanel Name="PART_ElemAgeRating">
+                                                                        <StackPanel.Style>
+                                                                            <Style TargetType="StackPanel">
+                                                                                <Setter Property="Visibility" Value="Visible" />
+                                                                                <Style.Triggers>
+                                                                                    <DataTrigger Binding="{Settings DetailsVisibility.AgeRating}" Value="False">
+                                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                                    </DataTrigger>
+                                                                                    <DataTrigger Binding="{Binding Game.AgeRatings}" Value="{x:Null}">
+                                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                                    </DataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </StackPanel.Style>
                                                                         <Separator Background="{StaticResource PanelSeparatorBrush}" Height="1" Margin="0,16,0,16" />
-                                                                        <ItemsControl Name="PART_ItemsAgeRatings">
+                                                                        <!--
+                                                                            Bound to Game.AgeRatings directly rather than through
+                                                                            PART_ItemsAgeRatings. Playnite configures its PART_Items*
+                                                                            controls itself, template included, so an ItemTemplate set
+                                                                            here is discarded and the ratings render as plain text.
+                                                                            Binding by hand costs the automatic collapse, which the
+                                                                            triggers above restore.
+                                                                        -->
+                                                                        <ItemsControl ItemsSource="{Binding Game.AgeRatings}">
                                                                             <ItemsControl.ItemsPanel>
                                                                                 <ItemsPanelTemplate>
                                                                                     <WrapPanel Orientation="Horizontal" />
@@ -753,7 +774,14 @@
                                                             <Grid>
                                                                 <Border CornerRadius="{DynamicResource ControlCornerRadiusLarge}" Style="{DynamicResource DetailViewCardBorder}" />
                                                                 <StackPanel Margin="20,16,20,16">
-                                                                    <TextBlock Text="{DynamicResource LOCPlayStats}" FontWeight="Bold" />
+                                                                    <!--
+                                                                        Literal, not a {DynamicResource LOC...}. Keys added to the
+                                                                        theme's LocSource.xaml do not resolve at runtime: Playnite
+                                                                        owns the LOC namespace and its own dictionary wins. A missing
+                                                                        key renders blank rather than failing, so the header simply
+                                                                        vanished.
+                                                                    -->
+                                                                    <TextBlock Text="Play Stats" FontWeight="Bold" />
                                                                     <GridEx x:Name="PlayStatsGrid" ColumnCount="2" StarColumns="1" RowCount="25" AutoLayoutColumns="2">
 
                                                                         <!--
