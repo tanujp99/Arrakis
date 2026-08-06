@@ -221,8 +221,13 @@
                                     bottom-right corner permanently.
 
                                     One column, as upstream had it. Spanning two was tried to make
-                                    the play button bigger and blew the whole stack up instead; the
-                                    play button is sized against the info button directly instead.
+                                    the play button bigger and blew the whole stack up instead.
+
+                                    The real cause was in the button style: GridViewPlayButton
+                                    hardcodes a 12px circle in its template, so Width and Height set
+                                    here never touched it. Upstream got away with that because the
+                                    button sat in a Viewbox two columns wide that scaled it up.
+                                    Fixed there rather than worked around here.
 
                                     An edit button was tried here and removed: the edit part is only
                                     wired on the overview views, never on a tile, so it rendered
@@ -239,7 +244,7 @@
 
                                     <Viewbox Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                                         <StackPanel Orientation="Vertical" Margin="8,0,0,8">
-                                            <Button Name="PART_ButtonPlay" Content="&#xf5b0;" Width="40" Height="40" Margin="0,0,2,6"
+                                            <Button Name="PART_ButtonPlay" Content="&#xf5b0;" Width="32" Height="32" Margin="0,0,6,6"
                                                     Style="{DynamicResource GridViewPlayButton}" />
                                             <Button Name="PART_ButtonInfo" Content="&#xedb1;" Width="32" Height="32" Margin="0,0,6,0"
                                                     Style="{DynamicResource GridViewInfoButton}" />

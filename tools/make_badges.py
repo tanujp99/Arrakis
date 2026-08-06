@@ -36,25 +36,29 @@ TROPHY = """
 """
 
 # Cut gem. Facets are implied by a lighter top band and a darker lower half.
-# Cut gem, faceted. A flat silhouette read as a coloured blob; a bright table
-# across the crown, lighter upper facets and a darker pavilion give it the
-# stepped shading that makes pixel-art gems look cut rather than drawn.
+# Cut gem, brilliant cut seen face on.
+#
+# Crown across the top: a bright table with lighter side facets falling away
+# from it. Pavilion below: facets converging on the point, with a lighter
+# column down the centre standing in for the reflection that makes a real
+# stone look lit from inside. Five tones plus the outline, which is what a
+# gem needs to stop reading as a coloured triangle.
 GEM = """
 ................
 ................
-................
 ....KKKKKKKK....
-...KWWWWWWWWK...
-..KWLLLLLLLLWK..
-.KWLMMMMMMMMLWK.
-KWLMMMMMMMMMMLWK
-.KBLMMMMMMMMLBK.
-..KBLMMMMMMLBK..
-...KBLMMMMLBK...
-....KBLMMLBK....
-.....KBLLBK.....
-......KBBK......
+...KAAAAAAAAK...
+..KBBAAAAAABBK..
+.KBBBCCCCCCBBBK.
+..KEDDDDDDDDEK..
+...KEDDCCDDEK...
+....KEDCCDEK....
+.....KECCEK.....
+......KCCK......
 .......KK.......
+................
+................
+................
 ................
 """
 
@@ -67,7 +71,7 @@ def fracture(gem):
     Walking a single column per row guarantees one continuous line.
     """
     rows = [list(r) for r in gem.strip("\n").split("\n")]
-    crack = {4: 8, 5: 7, 6: 8, 7: 7, 8: 8, 9: 7, 10: 8, 11: 7, 12: 7, 13: 7}
+    crack = {3: 8, 4: 7, 5: 8, 6: 7, 7: 8, 8: 7, 9: 8, 10: 7}
     for y, x in crack.items():
         if rows[y][x] != ".":
             rows[y][x] = "K"
@@ -96,14 +100,30 @@ RING = """
 ...........KK...
 """
 
-# K outline, W table highlight, L light facet, M body, B pavilion
-PALETTES = {
-    "badge_completed": (TROPHY, {"K": "#4A3200", "L": "#FFE07A", "M": "#E9B824", "B": "#8A6508"}),
-    "badge_beaten":    (GEM,    {"K": "#06301F", "W": "#DFFFF1", "L": "#7DF3C0", "M": "#10B981", "B": "#0A6E4E"}),
-    "badge_abandoned": (fracture(GEM), {"K": "#26292E", "W": "#C3C8CE", "L": "#8B9199", "M": "#5A5F66", "B": "#3A3E44"}),
-    "progress_active": (RING,   {"K": "#1E1E1E", "L": "#F2F2F2", "M": "#F2F2F2", "B": "#BFBFBF"}),
-    "progress_onhold": (RING,   {"K": "#3D2A00", "L": "#F5C56B", "M": "#F5A623", "B": "#B8791A"}),
-}
+
+
+
+def ramp(base, outline=None):
+    """
+    Builds a gem's five tones from a single colour.
+
+    Hand-picking every shade meant a new gem needed five judgement calls and
+    tended to come out flat, because the steps were never quite even. Mixing
+    toward white and black instead keeps the ramp consistent, so a gem is
+    defined by the one colour it actually is.
+    """
+    def mix(c, t, amt):
+        c, t = hexrgba(c)[:3], hexrgba(t)[:3]
+        return "#%02X%02X%02X" % tuple(round(a + (b - a) * amt) for a, b in zip(c, t))
+
+    return {
+        "A": mix(base, "#FFFFFF", 0.78),   # table highlight
+        "B": mix(base, "#FFFFFF", 0.48),   # crown facets
+        "C": mix(base, "#FFFFFF", 0.20),   # girdle and the centre reflection
+        "D": base,                          # body
+        "E": mix(base, "#000000", 0.34),   # pavilion shadow
+        "K": outline or mix(base, "#000000", 0.78),
+    }
 
 
 def hexrgba(h):
@@ -126,6 +146,16 @@ def build(grid, palette, name):
             assert ch in palette, f"{name}: no palette entry for {ch!r}"
             px[x, y] = hexrgba(palette[ch])
     return img.resize((16 * SCALE, 16 * SCALE), Image.NEAREST)
+
+
+# K outline, W table highlight, L light facet, M body, B pavilion
+PALETTES = {
+    "badge_completed": (TROPHY, {"K": "#4A3200", "L": "#FFE07A", "M": "#E9B824", "B": "#8A6508"}),
+    "badge_beaten":    (GEM, ramp("#10B981")),
+    "badge_abandoned": (fracture(GEM), ramp("#5A5F66")),
+    "progress_active": (RING,   {"K": "#1E1E1E", "L": "#F2F2F2", "M": "#F2F2F2", "B": "#BFBFBF"}),
+    "progress_onhold": (RING,   {"K": "#3D2A00", "L": "#F5C56B", "M": "#F5A623", "B": "#B8791A"}),
+}
 
 
 def main():
