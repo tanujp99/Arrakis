@@ -64,7 +64,6 @@
         <ResourceDictionary Source="CustomControls/HotKeyBox.xaml" />
         <!--Derived Styles-->
         <ResourceDictionary Source="DerivedStyles/TextBlockGameScore.xaml" />
-        <ResourceDictionary Source="DerivedStyles/ScoreBadge.xaml" />
         <ResourceDictionary Source="DerivedStyles/PropertyItemButton.xaml" />
         <ResourceDictionary Source="DerivedStyles/DetailsScrollViewer.xaml" />
         <ResourceDictionary Source="DerivedStyles/Simplebutton.xaml" />

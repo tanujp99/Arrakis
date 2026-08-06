@@ -481,19 +481,50 @@
                                                                                 when there is no score. Without the Visibility binding an
                                                                                 empty badge would be left behind.
                                                                             -->
-                                                                            <Label Name="PART_ElemCriticScore" Content="{DynamicResource LOCCriticScore}" />
-                                                                            <Border Style="{DynamicResource ScoreBadgeBorder}"
-                                                                                    Tag="{Binding ElementName=PART_TextCriticScore, Path=Tag}"
-                                                                                    Visibility="{Binding ElementName=PART_TextCriticScore, Path=Visibility}">
-                                                                                <TextBlock Name="PART_TextCriticScore" Style="{DynamicResource ScoreBadgeText}" />
-                                                                            </Border>
+                                                                            <!--
+                                                                                Critic and community share one row, side by side, the way
+                                                                                DekuDeals puts them. Both are boxed rather than one boxed
+                                                                                and one coloured text: the mixed band is #f5C518, and
+                                                                                yellow text is unreadable on the light theme's card. A
+                                                                                filled box carries its own contrast in either theme.
 
-                                                                            <Label Name="PART_ElemCommunityScore" Content="{DynamicResource LOCCommunityScore}" />
-                                                                            <Border Style="{DynamicResource ScoreBadgeBorder}"
-                                                                                    Tag="{Binding ElementName=PART_TextCommunityScore, Path=Tag}"
-                                                                                    Visibility="{Binding ElementName=PART_TextCommunityScore, Path=Visibility}">
-                                                                                <TextBlock Name="PART_TextCommunityScore" Style="{DynamicResource ScoreBadgeText}" />
-                                                                            </Border>
+                                                                                The label mirrors the row's Visibility rather than
+                                                                                carrying a Style of its own, which would shadow the
+                                                                                card's implicit Label style and lose the shared margins
+                                                                                and opacity.
+                                                                            -->
+                                                                            <Label Content="{DynamicResource LOCScores}"
+                                                                                   Visibility="{Binding ElementName=ScoreRow, Path=Visibility}" />
+                                                                            <StackPanel x:Name="ScoreRow" Orientation="Horizontal">
+                                                                                <StackPanel.Style>
+                                                                                    <Style TargetType="StackPanel">
+                                                                                        <Setter Property="Visibility" Value="Visible" />
+                                                                                        <Style.Triggers>
+                                                                                            <MultiDataTrigger>
+                                                                                                <MultiDataTrigger.Conditions>
+                                                                                                    <Condition Binding="{Binding ElementName=PART_TextCriticScore, Path=Visibility}" Value="Collapsed" />
+                                                                                                    <Condition Binding="{Binding ElementName=PART_TextCommunityScore, Path=Visibility}" Value="Collapsed" />
+                                                                                                </MultiDataTrigger.Conditions>
+                                                                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                                                            </MultiDataTrigger>
+                                                                                        </Style.Triggers>
+                                                                                    </Style>
+                                                                                </StackPanel.Style>
+
+                                                                                <Border Style="{DynamicResource ScoreBadgeBorder}"
+                                                                                        ToolTip="{DynamicResource LOCCriticScore}"
+                                                                                        Tag="{Binding ElementName=PART_TextCriticScore, Path=Tag}"
+                                                                                        Visibility="{Binding ElementName=PART_TextCriticScore, Path=Visibility}">
+                                                                                    <TextBlock Name="PART_TextCriticScore" Style="{DynamicResource ScoreBadgeText}" />
+                                                                                </Border>
+
+                                                                                <Border Style="{DynamicResource ScoreBadgeBorder}"
+                                                                                        ToolTip="{DynamicResource LOCCommunityScore}"
+                                                                                        Tag="{Binding ElementName=PART_TextCommunityScore, Path=Tag}"
+                                                                                        Visibility="{Binding ElementName=PART_TextCommunityScore, Path=Visibility}">
+                                                                                    <TextBlock Name="PART_TextCommunityScore" Style="{DynamicResource ScoreBadgeText}" />
+                                                                                </Border>
+                                                                            </StackPanel>
 
                                                                             <Label Name="PART_ElemCategories" Content="{DynamicResource LOCGameCategoriesTitle}" />
                                                                             <ItemsControl Name="PART_ItemsCategories" />
