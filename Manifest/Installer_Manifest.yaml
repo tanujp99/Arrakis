@@ -1,42 +1,12 @@
-AddonId: Dune_267ceefe-e1d4-4817-ac57-0b4ae5b7f884
+AddonId: Arrakis_0dcd3f68-cfaa-4bff-824b-165da182d09e
 Packages:
-  - Version: 0.8
-    RequiredApiVersion: 2.6.0
-    ReleaseDate: 2024-12-04
-    PackageUrl: https://github.com/sakasakiking/Dune/releases/download/Latest/Dune_267ceefe-e1d4-4817-ac57-0b4ae5b7f884_0_8.pthm
-    Changelog: 
-    - Initial release.
-  - Version: 0.9.1
+  - Version: 1.0.0
     RequiredApiVersion: 2.8.0
-    ReleaseDate: 2025-09-15
-    PackageUrl: https://github.com/sakasakiking/Dune/releases/download/Latest/Dune_267ceefe-e1d4-4817-ac57-0b4ae5b7f884_0_9_1.pthm
-    Changelog: 
-    - Second release since the first one after nearly 1 year.
-    - Basically, Dune is still a light theme, but this time you could switch it to ..Dune Night.., give it a shot via ThemeModifier.
-    - New layouts, New UI
-    - Fixed lots of issues.
-    - Continuing to optimize the theme...
-  - Version: 0.9.2
-    RequiredApiVersion: 2.8.0
-    ReleaseDate: 2025-09-21
-    PackageUrl: https://github.com/sakasakiking/Dune/releases/download/Latest/Dune_267ceefe-e1d4-4817-ac57-0b4ae5b7f884_0_9_2.pthm
-    Changelog: 
-    - Fixed lots of UI issues.
-    - Enhanced the UI performance.
-    - Updated the screenshots.  
-  - Version: 0.9.3
-    RequiredApiVersion: 2.8.0
-    ReleaseDate: 2025-09-26
-    PackageUrl: https://github.com/sakasakiking/Dune/releases/download/Latest/Dune_267ceefe-e1d4-4817-ac57-0b4ae5b7f884_0_9_3.pthm
-    Changelog: 
-    - Update game cover list in Grid overview
-    - Enhanced the UI performance.
-    - Add recommended settings
-  - Version: 0.9.4
-    RequiredApiVersion: 2.8.0
-    ReleaseDate: 2026-05-26
-    PackageUrl: https://github.com/sakasakiking/Dune/releases/download/Latest/Dune_267ceefe-e1d4-4817-ac57-0b4ae5b7f884_0_9_4.pthm
-    Changelog: 
-    - Fix UI issues -RadioButton-, -CheckBox-, -ComboBox- and other tiny issues.
-    - There're still some issues within dark mode that might not be fixed due to the restrictions of theme itself.
-    - Thanks for your support and understanding. 
+    ReleaseDate: 2026-08-06
+    PackageUrl: https://github.com/tanujp99/Arrakis/releases/download/Latest/Arrakis_0dcd3f68-cfaa-4bff-824b-165da182d09e_1_0_0.pthm
+    Changelog:
+    - First release of Arrakis, forked from Dune 0.9.4.
+    - Grid view overview panel rebuilt as a single narrow column of cards - Play Stats, Details, How Long To Beat.
+    - Play, install and context actions removed - the theme assumes Playnite is used to catalog owned games rather than launch them.
+    - Platform banners on grid tiles via the ThemeExtras plugin, finishing a feature Dune had scaffolded but left unfinished.
+    - Overview panel width now adjustable down to 360px in ThemeModifier, from 1024px.
