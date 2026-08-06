@@ -295,10 +295,55 @@
 
                                                             <!--GameInfo-->
                                                             <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Bottom"
-                                                                    HorizontalAlignment="Left" Margin="0,0,16,0">
-                                                                <TextBlock Text="{Binding Game.Name}" FontSize="{DynamicResource FontSizeLarge24}"
-                                                                        FontWeight="Bold" Foreground="White" TextWrapping="Wrap"
-                                                                        HorizontalAlignment="Left" Margin="0,0,0,8" />
+                                                                    HorizontalAlignment="Stretch" Margin="0,0,16,0">
+                                                                <!--
+                                                                    Title and completion badge share a row. The badge docks right
+                                                                    and sits on the baseline, so a title wrapping to two lines
+                                                                    pushes it to the second line rather than displacing the title.
+                                                                    Genres flow underneath both.
+
+                                                                    Display only. PART_Button* controls filter rather than edit, so
+                                                                    nothing here can change the status.
+                                                                -->
+                                                                <DockPanel LastChildFill="True">
+                                                                    <Image Width="32" Height="32" RenderOptions.BitmapScalingMode="NearestNeighbor" DockPanel.Dock="Right" VerticalAlignment="Bottom" Margin="12,0,0,10"
+                                                                    ToolTip="{Binding Game.CompletionStatus.Name}">
+                                                                    <Image.Style>
+                                                                    <Style TargetType="Image">
+                                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                                    <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Playing">
+                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                    <Setter Property="Source" Value="{DynamicResource BadgeProgressActive}" />
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Played">
+                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                    <Setter Property="Source" Value="{DynamicResource BadgeProgressActive}" />
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="On Hold">
+                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                    <Setter Property="Source" Value="{DynamicResource BadgeProgressOnHold}" />
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Beaten">
+                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                    <Setter Property="Source" Value="{DynamicResource BadgeBeaten}" />
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Completed">
+                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                    <Setter Property="Source" Value="{DynamicResource BadgeCompleted}" />
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Abandoned">
+                                                                    <Setter Property="Visibility" Value="Visible" />
+                                                                    <Setter Property="Source" Value="{DynamicResource BadgeAbandoned}" />
+                                                                    </DataTrigger>
+                                                                    </Style.Triggers>
+                                                                    </Style>
+                                                                    </Image.Style>
+                                                                    </Image>
+                                                                    <TextBlock Text="{Binding Game.Name}" FontSize="{DynamicResource FontSizeLarge24}"
+                                                                            FontWeight="Bold" Foreground="White" TextWrapping="Wrap"
+                                                                            HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,8" />
+                                                                </DockPanel>
                                                                 <StackPanel Orientation="Horizontal">
                                                                 
 
@@ -1023,51 +1068,6 @@
                                 
                                 <!--Completion status + Panel Close + Edit Buttons-->
                                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="16,16,16,0">
-                                                                        <!--
-                                        Completion trophy, display only. PART_ButtonCompletionStatus
-                                        was tried here first on the assumption that a wired button
-                                        would let the status be edited; it does not. Playnite's
-                                        PART_Button* controls raise filters, so clicking it filtered
-                                        the library by completion status rather than opening a picker.
-                                        Nothing in a theme can set this field.
-
-                                        Same sprites as the grid tiles, so the panel and the
-                                        library agree.
-                                    -->
-                                    <Image Width="26" Height="26" RenderOptions.BitmapScalingMode="NearestNeighbor" Margin="0,3,10,0" VerticalAlignment="Center"
-                                           ToolTip="{Binding Game.CompletionStatus.Name}">
-                                        <Image.Style>
-                                            <Style TargetType="Image">
-                                                <Setter Property="Visibility" Value="Collapsed" />
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Playing">
-                                                        <Setter Property="Visibility" Value="Visible" />
-                                                        <Setter Property="Source" Value="{DynamicResource BadgeProgressActive}" />
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Played">
-                                                        <Setter Property="Visibility" Value="Visible" />
-                                                        <Setter Property="Source" Value="{DynamicResource BadgeProgressActive}" />
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="On Hold">
-                                                        <Setter Property="Visibility" Value="Visible" />
-                                                        <Setter Property="Source" Value="{DynamicResource BadgeProgressOnHold}" />
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Beaten">
-                                                        <Setter Property="Visibility" Value="Visible" />
-                                                        <Setter Property="Source" Value="{DynamicResource BadgeBeaten}" />
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Completed">
-                                                        <Setter Property="Visibility" Value="Visible" />
-                                                        <Setter Property="Source" Value="{DynamicResource BadgeCompleted}" />
-                                                    </DataTrigger>
-                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Abandoned">
-                                                        <Setter Property="Visibility" Value="Visible" />
-                                                        <Setter Property="Source" Value="{DynamicResource BadgeAbandoned}" />
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Image.Style>
-                                    </Image>
                                     <Button x:Name="PART_ButtonEditGame" Focusable="False"
                                             Content="&#xe713;"
                                             Width="32" Height="32"
