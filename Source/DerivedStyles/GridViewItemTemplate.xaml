@@ -220,9 +220,9 @@
                                     Hover controls, stacked bottom-left because the badge owns the
                                     bottom-right corner permanently.
 
-                                    The Viewbox spans two columns rather than one. It scales content
-                                    to the cell, so a taller stack in a narrow cell shrinks every
-                                    button in it, and one column left these barely tappable.
+                                    One column, as upstream had it. Spanning two was tried to make
+                                    the play button bigger and blew the whole stack up instead; the
+                                    play button is sized against the info button directly instead.
 
                                     An edit button was tried here and removed: the edit part is only
                                     wired on the overview views, never on a tile, so it rendered
@@ -237,9 +237,9 @@
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
 
-                                    <Viewbox Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                                    <Viewbox Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Left">
                                         <StackPanel Orientation="Vertical" Margin="8,0,0,8">
-                                            <Button Name="PART_ButtonPlay" Content="&#xf5b0;" Width="32" Height="32" Margin="0,0,6,6"
+                                            <Button Name="PART_ButtonPlay" Content="&#xf5b0;" Width="40" Height="40" Margin="0,0,2,6"
                                                     Style="{DynamicResource GridViewPlayButton}" />
                                             <Button Name="PART_ButtonInfo" Content="&#xedb1;" Width="32" Height="32" Margin="0,0,6,0"
                                                     Style="{DynamicResource GridViewInfoButton}" />

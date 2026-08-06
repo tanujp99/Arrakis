@@ -306,7 +306,7 @@
                                                                     nothing here can change the status.
                                                                 -->
                                                                 <DockPanel LastChildFill="True">
-                                                                    <Image Width="32" Height="32" RenderOptions.BitmapScalingMode="NearestNeighbor" DockPanel.Dock="Right" VerticalAlignment="Bottom" Margin="12,0,0,10"
+                                                                    <Image Width="32" Height="32" RenderOptions.BitmapScalingMode="NearestNeighbor" DockPanel.Dock="Right" VerticalAlignment="Bottom" Margin="12,0,-10,10"
                                                                     ToolTip="{Binding Game.CompletionStatus.Name}">
                                                                     <Image.Style>
                                                                     <Style TargetType="Image">
