@@ -180,11 +180,17 @@
 
                                                             This Grid stretches instead, so Center means the hero's centre. The
                                                             right margin matches the left (the old one was 0, which let wide
-                                                            logos run under the settings button) and the bottom margin keeps
-                                                            clear of the genre row.
+                                                            logos run under the settings button).
+
+                                                            Bottom aligned rather than centred, because the hero darkens toward
+                                                            the bottom and vertical centre is the brightest, busiest part of the
+                                                            artwork. Sitting the logo in the gradient buys legibility on every
+                                                            game at once, which per-game positioning could only do one game at a
+                                                            time. Anchoring to the bottom edge also keeps the offset stable as
+                                                            the hero grows and shrinks with the panel; a top margin would not.
                                                         -->
-                                                        <Grid Margin="40,44,40,64">
-                                                            <Border x:Name="ExtraMetadataLoader_LogoLoaderControlGrid" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                                        <Grid Margin="40,44,40,76">
+                                                            <Border x:Name="ExtraMetadataLoader_LogoLoaderControlGrid" VerticalAlignment="Bottom" HorizontalAlignment="Center"
                                                                     Tag="{DynamicResource DetailsViewAllowUseOfLogos}">
                                                                 <Border.Style>
                                                                     <Style TargetType="Border">
