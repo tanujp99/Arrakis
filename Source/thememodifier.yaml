@@ -1,13 +1,16 @@
-> Ordering here is the ordering the settings page shows, and the quoted
-> strings are section headers. Grouped by what a setting affects rather than
-> by which control it happens to render as, so related options sit together
-> even where one is a slider and its neighbour a checkbox.
->
-> The four Visibility-typed constants render as three-option dropdowns
-> because that is how ThemeModifier maps the type; sys:Boolean would render
-> a checkbox instead. They are not Booleans because each one feeds elements
-> whose visibility has more than one condition, and the checkbox pattern
-> sets Visibility as a local value, which would override those conditions.
+# Comments here must start with '#'. A '>' opens a folded block scalar and
+# swallows the whole document, which empties the settings page entirely.
+#
+# Ordering here is the ordering the settings page shows, and the quoted
+# strings are section headers. Grouped by what a setting affects rather than
+# by which control it happens to render as, so related options sit together
+# even where one is a slider and its neighbour a checkbox.
+#
+# The four Visibility-typed constants render as three-option dropdowns
+# because that is how ThemeModifier maps the type; sys:Boolean would render
+# a checkbox instead. They are not Booleans because each one feeds elements
+# whose visibility has more than one condition, and the checkbox pattern
+# sets Visibility as a local value, which would override those conditions.
 
 Constants:
     - "Theme"
