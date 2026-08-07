@@ -176,8 +176,20 @@
                                                    FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="{DynamicResource TextBrush}" />
                                         <TextBlock Text="&#xEB52;" Width="13" FontSize="11.5" TextAlignment="Center" VerticalAlignment="Center"
                                                    FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="{DynamicResource TextBrush}" />
+                                        <!--
+                                            The sixth heart is gold, because six is not simply one
+                                            more than five. The working scale runs 1 to 5 and this
+                                            slot is the rare one, so it should not look like the
+                                            others do. A literal gold rather than the accent brush:
+                                            the accent is user-set and could land anywhere, and this
+                                            needs to read as special in both themes.
+
+                                            It only appears as the fill reaches the last heart, so
+                                            5.5 shows half of it, which is the right amount of
+                                            almost.
+                                        -->
                                         <TextBlock Text="&#xEB52;" Width="13" FontSize="11.5" TextAlignment="Center" VerticalAlignment="Center"
-                                                   FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="{DynamicResource TextBrush}" />
+                                                   FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="#E0A400" />
                                     </StackPanel>
                                 </Grid>
                             </Grid>
