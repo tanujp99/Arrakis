@@ -168,6 +168,22 @@
                                                                     </Style>
                                                                 </Border.Style>
                                                             </Border>
+                                                        </Grid>
+
+                                                        <!--
+                                                            The logo needs its own container. It used to share the icon's Grid
+                                                            above, which is Left/Top aligned and sizes to its own content, so
+                                                            centring the logo inside it centred it within a box that hugged the
+                                                            logo, which does nothing. Every logo was pinned top-left; the ones that read
+                                                            as centred were simply wide enough to reach the middle, which is why
+                                                            narrow logos looked wrong and wide ones looked fine.
+
+                                                            This Grid stretches instead, so Center means the hero's centre. The
+                                                            right margin matches the left (the old one was 0, which let wide
+                                                            logos run under the settings button) and the bottom margin keeps
+                                                            clear of the genre row.
+                                                        -->
+                                                        <Grid Margin="40,44,40,64">
                                                             <Border x:Name="ExtraMetadataLoader_LogoLoaderControlGrid" VerticalAlignment="Center" HorizontalAlignment="Center"
                                                                     Tag="{DynamicResource DetailsViewAllowUseOfLogos}">
                                                                 <Border.Style>
