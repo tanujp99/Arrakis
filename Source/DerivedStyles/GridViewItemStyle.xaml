@@ -200,12 +200,17 @@
                                                 <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="On Hold">
                                                     <Setter Property="Text" Value="&#xE769;" />
                                                 </DataTrigger>
-                                                <!-- Hollow ring, not a check: played is not an ending. -->
+                                                <!--
+                                                    Played, Beaten and Completed are one ladder, so they
+                                                    get one shape that fills up: ring, disc, star. The
+                                                    label next to the glyph already carries the meaning,
+                                                    which frees the glyph to carry the ranking instead.
+                                                -->
                                                 <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Played">
                                                     <Setter Property="Text" Value="&#xECCA;" />
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Beaten">
-                                                    <Setter Property="Text" Value="&#xE8FB;" />
+                                                    <Setter Property="Text" Value="&#xE91F;" />
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Completed">
                                                     <Setter Property="Text" Value="&#xE735;" />
