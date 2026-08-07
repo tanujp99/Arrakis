@@ -202,7 +202,15 @@
                                                                 <ColumnDefinition Width="Auto" />
                                                             </Grid.ColumnDefinitions>
 
-                                                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom">
+                                                            <!--
+                                                                Image/video switcher, off. A local Visibility outranks every
+                                                                trigger in the style below, so the markup stays intact and
+                                                                turning it back on is a one-word change. It cost roughly half
+                                                                the panel width and pushed the genres off the edge; the logo
+                                                                is the part of ExtraMetadataLoader worth the space here.
+                                                            -->
+                                                            <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom"
+                                                                    Visibility="Collapsed">
                                                                 <StackPanel.Style>
                                                                     <Style TargetType="StackPanel">
                                                                         <Setter Property="Visibility" Value="Collapsed" />
@@ -361,17 +369,11 @@
                                                                         </TextBlock.Style>
                                                                     </TextBlock>
                                                                 </DockPanel>
-                                                                <!--
-                                                                    WrapPanel, not StackPanel. A horizontal StackPanel measures its
-                                                                    children with infinite width, so the genre WrapPanel below never
-                                                                    saw a constraint to wrap against and simply ran off the panel
-                                                                    edge, silently clipping genres. Same reason PART_ElemGenres is
-                                                                    vertical: it has one child, and vertical passes the real width
-                                                                    down instead of infinity.
-                                                                -->
-                                                                <WrapPanel Orientation="Horizontal">
+                                                                <StackPanel Orientation="Horizontal">
+
+
                                                                 <Button Name="PART_ButtonSource" Margin="4,2,4,0" Padding="0" Style="{DynamicResource PropertyItemOutlinedButton}" />
-                                                                <StackPanel Name="PART_ElemGenres" Orientation="Vertical">
+                                                                <StackPanel Name="PART_ElemGenres" Orientation="Horizontal">
                                                                     <StackPanel.Style>
                                                                         <Style TargetType="StackPanel">
                                                                             <Setter Property="Visibility" Value="Visible" />
@@ -402,7 +404,7 @@
                                                                     </ItemsControl>
                                                                 </StackPanel>
 
-                                                            </WrapPanel>
+                                                            </StackPanel>
                                                             </StackPanel>
 
                                                         </Grid>
