@@ -202,7 +202,7 @@
                                                 </DataTrigger>
                                                 <!-- Hollow ring, not a check: played is not an ending. -->
                                                 <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Played">
-                                                    <Setter Property="Text" Value="&#xE91F;" />
+                                                    <Setter Property="Text" Value="&#xECCA;" />
                                                 </DataTrigger>
                                                 <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Beaten">
                                                     <Setter Property="Text" Value="&#xE8FB;" />
