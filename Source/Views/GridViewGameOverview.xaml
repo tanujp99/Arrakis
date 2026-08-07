@@ -748,8 +748,14 @@
                                                                                         </Style.Triggers>
                                                                                     </Style>
                                                                                 </Grid.Style>
+                                                                                    <!--
+                                                                                        Thickness is pre-divided by the Viewbox scale (66/49), so
+                                                                                        1.25 here lands at roughly 1.7 on screen. The stroke gets
+                                                                                        scaled like everything else, which is what made a value
+                                                                                        that was fine at 49px read as heavy at 66.
+                                                                                    -->
                                                                                     <Border x:Name="Pegi" Visibility="Collapsed" Width="38" Height="49" CornerRadius="5" Background="#4C9C2E"
-                                        BorderBrush="#141414" BorderThickness="2">
+                                        BorderBrush="#141414" BorderThickness="1.25">
                                                                                         <Grid>
                                                                                             <Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="11" /></Grid.RowDefinitions>
                                                                                             <TextBlock x:Name="PegiVal" Foreground="White" FontWeight="Bold" FontSize="28" Margin="0,-2,0,0"
@@ -761,7 +767,7 @@
                                                                                         </Grid>
                                                                                     </Border>
                                                                                     <Border x:Name="Esrb" Visibility="Collapsed" Width="38" Height="49" CornerRadius="3"
-                                                                                            Background="White" BorderBrush="#111111" BorderThickness="2">
+                                                                                            Background="White" BorderBrush="#111111" BorderThickness="1.25">
                                                                                         <Grid>
                                                                                             <Grid.RowDefinitions><RowDefinition Height="*" /><RowDefinition Height="14" /></Grid.RowDefinitions>
                                                                                             <TextBlock x:Name="EsrbVal" Foreground="#111111" FontWeight="Bold" FontSize="24" Margin="0,-1,0,0"
