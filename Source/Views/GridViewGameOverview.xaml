@@ -729,8 +729,15 @@
                                                                                 replacing them: the toggle hides one set and shows the other, so a
                                                                                 package that never turns it on ships no trademarked art.
                                                                             -->
-                                                                            <Image x:Name="OfficialMark" Visibility="Collapsed" Height="49" Stretch="Uniform"
+                                                                            <Image x:Name="OfficialMark" Visibility="Collapsed" Height="66" Stretch="Uniform"
                                                                                    HorizontalAlignment="Right" VerticalAlignment="Top" />
+                                                                            <!--
+                                                                                The drawn mark is scaled by a Viewbox rather than by editing the
+                                                                                six nested sizes it is built from, so its proportions stay put.
+                                                                                Explicit Height with Stretch=Uniform: a Viewbox left to itself
+                                                                                fills whatever cell it lands in and ignores its child's size.
+                                                                            -->
+                                                                            <Viewbox Height="66" Stretch="Uniform" HorizontalAlignment="Right" VerticalAlignment="Top">
                                                                             <Grid x:Name="DrawnMark" Tag="{DynamicResource AgeRatingOfficialArt}">
                                                                                 <Grid.Style>
                                                                                     <Style TargetType="Grid">
@@ -769,6 +776,7 @@
                                                                                         <TextBlock Text="{Binding Name}" Foreground="White" FontSize="10" VerticalAlignment="Center" />
                                                                                     </Border>
                                                                                                                                                             </Grid>
+                                                                            </Viewbox>
                                                                         </Grid>
                                                                                 <DataTemplate.Triggers>
                                                                                     <DataTrigger Binding="{Binding Name}" Value="PEGI 3">
