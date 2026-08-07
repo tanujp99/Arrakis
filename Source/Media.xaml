@@ -12,13 +12,15 @@
         square at any size; Fant would blur them into ordinary blobs, which is
         the whole reason for pixel art on a high-DPI display.
     -->
-    <BitmapImage x:Key="BadgeCompleted" UriSource="{ThemeFile 'Images/Badges/badge_completed.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
+        <BitmapImage x:Key="BadgeTrophy" UriSource="{ThemeFile 'Images/Badges/badge_trophy.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
+    <BitmapImage x:Key="BadgeMedal" UriSource="{ThemeFile 'Images/Badges/badge_medal.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
     <BitmapImage x:Key="BadgeBeaten" UriSource="{ThemeFile 'Images/Badges/badge_beaten.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
     <BitmapImage x:Key="BadgeAbandoned" UriSource="{ThemeFile 'Images/Badges/badge_abandoned.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
-    <BitmapImage x:Key="BadgeProgressActive" UriSource="{ThemeFile 'Images/Badges/progress_active.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
-    <BitmapImage x:Key="BadgeProgressOnHold" UriSource="{ThemeFile 'Images/Badges/progress_onhold.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
+    <BitmapImage x:Key="PipPlaying" UriSource="{ThemeFile 'Images/Badges/pip_playing.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
+    <BitmapImage x:Key="PipPlan" UriSource="{ThemeFile 'Images/Badges/pip_plan.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
+    <BitmapImage x:Key="PipOnHold" UriSource="{ThemeFile 'Images/Badges/pip_onhold.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
 
-    <BitmapImage x:Key="TrayIcon" UriSource="{ThemeFile 'Images/applogo.ico'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
+<BitmapImage x:Key="TrayIcon" UriSource="{ThemeFile 'Images/applogo.ico'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
     <BitmapImage x:Key="TrayIconWhite" UriSource="{ThemeFile 'Images/applogo_black.ico'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
     <BitmapImage x:Key="TrayIconBlack" UriSource="{ThemeFile 'Images/applogo_white.ico'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
     <TextBlock x:Key="FullscreenModeIcon" Text="&#xe7f4;" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets"/>

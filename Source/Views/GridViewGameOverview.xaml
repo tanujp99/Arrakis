@@ -306,15 +306,35 @@
                                                                     nothing here can change the status.
                                                                 -->
                                                                 <DockPanel LastChildFill="True">
-                                                                    <Image Width="32" Height="32" RenderOptions.BitmapScalingMode="NearestNeighbor" DockPanel.Dock="Right" VerticalAlignment="Bottom" Margin="12,0,-10,10"
+                                                                    <Image Width="40" Height="40" RenderOptions.BitmapScalingMode="NearestNeighbor" DockPanel.Dock="Right" VerticalAlignment="Bottom" Margin="12,0,-10,10"
                                                                     ToolTip="{Binding Game.CompletionStatus.Name}">
                                                                     <Image.Style>
                                                                     <Style TargetType="Image">
                                                                     <Setter Property="Visibility" Value="Collapsed" />
                                                                     <Style.Triggers>
                                                                     <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Playing">
-                                                                    <Setter Property="Visibility" Value="Visible" />
-                                                                    <Setter Property="Source" Value="{DynamicResource BadgeProgressActive}" />
+                                                                        <Setter Property="Visibility" Value="Visible" />
+                                                                        <Setter Property="Source" Value="{DynamicResource PipPlaying}" />
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Plan to Play">
+                                                                        <Setter Property="Visibility" Value="Visible" />
+                                                                        <Setter Property="Source" Value="{DynamicResource PipPlan}" />
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="On Hold">
+                                                                        <Setter Property="Visibility" Value="Visible" />
+                                                                        <Setter Property="Source" Value="{DynamicResource PipOnHold}" />
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Beaten">
+                                                                        <Setter Property="Visibility" Value="Visible" />
+                                                                        <Setter Property="Source" Value="{DynamicResource BadgeTrophy}" />
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Completed">
+                                                                        <Setter Property="Visibility" Value="Visible" />
+                                                                        <Setter Property="Source" Value="{DynamicResource BadgeTrophy}" />
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Abandoned">
+                                                                        <Setter Property="Visibility" Value="Visible" />
+                                                                        <Setter Property="Source" Value="{DynamicResource BadgeAbandoned}" />
                                                                     </DataTrigger>
                                                                     <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Played">
                                                                     <Setter Property="Visibility" Value="Visible" />

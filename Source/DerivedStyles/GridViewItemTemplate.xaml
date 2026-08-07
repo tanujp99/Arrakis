@@ -178,8 +178,8 @@
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <Viewbox Grid.Column="3" Grid.ColumnSpan="2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-                                        <Image Width="28" Height="28" RenderOptions.BitmapScalingMode="NearestNeighbor" Margin="6,6,10,10"
+                                    <Viewbox Grid.Column="4" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                                        <Image Width="26" Height="26" RenderOptions.BitmapScalingMode="NearestNeighbor" Margin="6,6,10,10"
                                                ToolTip="{Binding CompletionStatus.Name}">
                                             <Image.Style>
                                                 <Style TargetType="Image">
@@ -187,7 +187,27 @@
                                                     <Style.Triggers>
                                                         <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Playing">
                                                             <Setter Property="Visibility" Value="Visible" />
-                                                            <Setter Property="Source" Value="{DynamicResource BadgeProgressActive}" />
+                                                            <Setter Property="Source" Value="{DynamicResource PipPlaying}" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Plan to Play">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                            <Setter Property="Source" Value="{DynamicResource PipPlan}" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="On Hold">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                            <Setter Property="Source" Value="{DynamicResource PipOnHold}" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Beaten">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                            <Setter Property="Source" Value="{DynamicResource BadgeBeaten}" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Completed">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                            <Setter Property="Source" Value="{DynamicResource BadgeMedal}" />
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Abandoned">
+                                                            <Setter Property="Visibility" Value="Visible" />
+                                                            <Setter Property="Source" Value="{DynamicResource BadgeAbandoned}" />
                                                         </DataTrigger>
                                                         <DataTrigger Binding="{Binding CompletionStatus.Name}" Value="Played">
                                                             <Setter Property="Visibility" Value="Visible" />
