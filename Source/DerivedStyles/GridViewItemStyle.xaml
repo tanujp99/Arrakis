@@ -56,13 +56,28 @@
                                 came back null, and matched the x:Null trigger below: the
                                 pips collapsed on every game including scored ones.
 
-                                Both rows are one TextBlock of six glyphs at a fixed 84px,
-                                so the fill factor is a known 0.84 per point of score.
-                                Two elements rather than twelve: this template is
-                                instantiated per tile, so element count here is multiplied
-                                across the whole library.
+                                Each star is a fixed 14px cell, so the row is exactly 84px
+                                and the fill factor is a known 0.84 per point of score.
+                                Setting Width on a single six-glyph TextBlock did not do
+                                that: it padded the box without stretching the glyphs, so
+                                the stars covered roughly 66px while the clip was computed
+                                against 84, and a score of 68 lit five stars, not four.
                             -->
-                            <Grid x:Name="UserScorePips" HorizontalAlignment="Left" Margin="0,0,0,4"
+                            <!--Time Played-->
+                            <DockPanel x:Name="PlayedTime" Width="{Settings GridItemWidth}" Visibility="{DynamicResource GridViewGameCoverShowPlayedTime}" Margin="0,0,0,4">
+                                <TextBlock Text="&#xe121;" FontSize="{DynamicResource FontSizeSmall}" TextAlignment="Left" Margin="0,0,0,0"
+                                           Style="{StaticResource IconFontStyle}" />
+                                <TextBlock Text="{Binding Playtime, Mode=OneWay, Converter={StaticResource PlayTimeToStringConverter}, IsAsync=True}"
+                                           FontSize="{DynamicResource FontSizeSmall}" TextAlignment="Left" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Margin="4,0,0,0"
+                                        Style="{DynamicResource BaseTextBlockStyle}" />
+                            </DockPanel>
+                            <!--
+                                Score and completion status share one line. Stacked, the pair
+                                overflowed the space under the cover and the status was clipped
+                                away; side by side they fit without adding height to the tile.
+                            -->
+                            <DockPanel Width="{Settings GridItemWidth}" Margin="0,0,0,4">
+                            <Grid x:Name="UserScorePips" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,0,0"
                                   Tag="{DynamicResource GridViewGameCoverShowUserScore}">
                                 <Grid.Style>
                                     <Style TargetType="Grid">
@@ -79,25 +94,29 @@
                                     </Style>
                                 </Grid.Style>
 
-                                <TextBlock Text="&#xE734;&#xE734;&#xE734;&#xE734;&#xE734;&#xE734;" Width="84" Opacity="0.3"
-                                           Style="{StaticResource IconFontStyle}" FontSize="{DynamicResource FontSizeSmall}" />
+                                <StackPanel Orientation="Horizontal" Opacity="0.3">
+                                    <TextBlock Text="&#xE734;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
+                                    <TextBlock Text="&#xE734;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
+                                    <TextBlock Text="&#xE734;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
+                                    <TextBlock Text="&#xE734;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
+                                    <TextBlock Text="&#xE734;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
+                                    <TextBlock Text="&#xE734;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
+                                </StackPanel>
 
                                 <Grid HorizontalAlignment="Left" ClipToBounds="True"
                                       Width="{Binding Game.UserScore, Converter={PluginConverter Plugin=ThemeExtras, Converter=MultiplyConverter}, ConverterParameter=0.84, FallbackValue=0}">
-                                    <TextBlock Text="&#xE735;&#xE735;&#xE735;&#xE735;&#xE735;&#xE735;" Width="84" HorizontalAlignment="Left"
-                                               Style="{StaticResource IconFontStyle}" FontSize="{DynamicResource FontSizeSmall}" />
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                        <TextBlock Text="&#xE735;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
+                                        <TextBlock Text="&#xE735;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
+                                        <TextBlock Text="&#xE735;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
+                                        <TextBlock Text="&#xE735;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
+                                        <TextBlock Text="&#xE735;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
+                                        <TextBlock Text="&#xE735;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
+                                    </StackPanel>
                                 </Grid>
                             </Grid>
-                            <!--Time Played-->
-                            <DockPanel x:Name="PlayedTime" Width="{Settings GridItemWidth}" Visibility="{DynamicResource GridViewGameCoverShowPlayedTime}" Margin="0,0,0,4">
-                                <TextBlock Text="&#xe121;" FontSize="{DynamicResource FontSizeSmall}" TextAlignment="Left" Margin="0,0,0,0"
-                                           Style="{StaticResource IconFontStyle}" />
-                                <TextBlock Text="{Binding Playtime, Mode=OneWay, Converter={StaticResource PlayTimeToStringConverter}, IsAsync=True}"
-                                           FontSize="{DynamicResource FontSizeSmall}" TextAlignment="Left" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Margin="4,0,0,0"
-                                        Style="{DynamicResource BaseTextBlockStyle}" />
-                            </DockPanel>
                             <!--Playing Status-->
-                            <DockPanel x:Name="PlayingStatus" Width="{Settings GridItemWidth}" Tag="{DynamicResource GridViewGameCoverShowCompletionStatus}" Margin="0,0,0,4">
+                            <DockPanel x:Name="PlayingStatus" Tag="{DynamicResource GridViewGameCoverShowCompletionStatus}" Margin="0,0,0,4">
                                 <DockPanel.Style>
                                     <Style TargetType="DockPanel">
                                         <Setter Property="Visibility" Value="Visible" />
@@ -150,6 +169,7 @@
                                            TextTrimming="CharacterEllipsis" ToolTip="{Binding RelativeSource={RelativeSource Self}, Path=Text}" 
                                            FontSize="{DynamicResource FontSizeSmall}" VerticalAlignment="Center"
                                            Margin="4,0,0,0" Style="{DynamicResource BaseTextBlockStyle}" />
+                            </DockPanel>
                             </DockPanel>
                         </StackPanel>
 
