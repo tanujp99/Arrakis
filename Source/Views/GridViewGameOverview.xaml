@@ -326,50 +326,7 @@
                                                             <!--GameInfo-->
                                                             <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Bottom"
                                                                     HorizontalAlignment="Stretch" Margin="0,0,16,0">
-                                                                <!--
-                                                                    Title and completion badge share a row. The badge docks right
-                                                                    and sits on the baseline, so a title wrapping to two lines
-                                                                    pushes it to the second line rather than displacing the title.
-                                                                    Genres flow underneath both.
-
-                                                                    Display only. PART_Button* controls filter rather than edit, so
-                                                                    nothing here can change the status.
-                                                                -->
                                                                 <DockPanel LastChildFill="True">
-                                                                    <Image Width="40" Height="40" RenderOptions.BitmapScalingMode="NearestNeighbor" DockPanel.Dock="Right" VerticalAlignment="Bottom" Margin="12,0,-10,10"
-                                                                    ToolTip="{Binding Game.CompletionStatus.Name}">
-                                                                    <Image.Style>
-                                                                    <Style TargetType="Image">
-                                                                    <Setter Property="Visibility" Value="Collapsed" />
-                                                                    <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Playing">
-                                                                        <Setter Property="Visibility" Value="Visible" />
-                                                                        <Setter Property="Source" Value="{DynamicResource PipPlaying}" />
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Plan to Play">
-                                                                        <Setter Property="Visibility" Value="Visible" />
-                                                                        <Setter Property="Source" Value="{DynamicResource PipPlan}" />
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="On Hold">
-                                                                        <Setter Property="Visibility" Value="Visible" />
-                                                                        <Setter Property="Source" Value="{DynamicResource PipOnHold}" />
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Beaten">
-                                                                        <Setter Property="Visibility" Value="Visible" />
-                                                                        <Setter Property="Source" Value="{DynamicResource BadgeBeaten}" />
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Completed">
-                                                                        <Setter Property="Visibility" Value="Visible" />
-                                                                        <Setter Property="Source" Value="{DynamicResource BadgeTrophy}" />
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Abandoned">
-                                                                        <Setter Property="Visibility" Value="Visible" />
-                                                                        <Setter Property="Source" Value="{DynamicResource BadgeAbandoned}" />
-                                                                    </DataTrigger>
-                                                                    </Style.Triggers>
-                                                                    </Style>
-                                                                    </Image.Style>
-                                                                    </Image>
                                                                     <!--
                                                                         The logo already says the name, usually better than text can.
                                                                         Rather than re-derive when a logo exists, the title watches the
@@ -543,6 +500,16 @@
                                                                     <StackPanel>
                                                                         <TextBlock Text="{DynamicResource LOCGameDetails}" FontWeight="Bold" />
                                                                         <GridEx x:Name="GDGrid" ColumnCount="2" StarColumns="1" RowCount="25" AutoLayoutColumns="2">
+
+                                                                            <!--
+                                                                                The hero hides the title whenever a logo is present, so the
+                                                                                name has to live somewhere that always shows it. Plain
+                                                                                TextBlock rather than a PART_: the name is never absent,
+                                                                                so there is no row to collapse.
+                                                                            -->
+                                                                            <Label Content="{DynamicResource LOCNameLabel}" />
+                                                                            <TextBlock Text="{Binding Game.Name}" TextWrapping="Wrap"
+                                                                                    VerticalAlignment="Center" Margin="0,12,0,0" />
 
                                                                             <Label Name="PART_ElemDevelopers" Content="{DynamicResource LOCDeveloperLabel}" />
                                                                             <ItemsControl Name="PART_ItemsDevelopers" />
