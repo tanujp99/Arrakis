@@ -937,10 +937,33 @@
                                                                             is theirs rather than the game's.
                                                                         -->
                                                                         <Label Name="PART_ElemUserScore" Content="{DynamicResource LOCUserScore}" />
+                                                                        <!--
+                                                                            Shown on the 0 to 6 scale it was actually entered on, not the
+                                                                            0 to 100 field it is stored in. StarRatings divides 100 by 6
+                                                                            with integer arithmetic, so a star is worth exactly 16 and
+                                                                            the raw number tops out at 96. Reading 96 as a near miss when
+                                                                            it means six of six is the whole problem, and adding 4 to
+                                                                            close that gap would fix only the top: it would leave 0
+                                                                            reading as 4.
+
+                                                                            Dividing by 16 is exact for every value the plugin writes,
+                                                                            half stars included, so nothing needs rounding. Multiply by
+                                                                            0.0625 rather than DivideConverter, since this is the same
+                                                                            converter the hearts already rely on.
+
+                                                                            PART_TextUserScore stays wired and invisible: Playnite fills
+                                                                            its Tag with the ScoreRating that colours the badge, and its
+                                                                            Visibility already hides the row for unscored games. Only
+                                                                            the digits are ours.
+                                                                        -->
                                                                         <Border Style="{DynamicResource ScoreBadgeBorder}"
                                                                                 Tag="{Binding ElementName=PART_TextUserScore, Path=Tag}"
                                                                                 Visibility="{Binding ElementName=PART_TextUserScore, Path=Visibility}">
-                                                                            <TextBlock Name="PART_TextUserScore" Style="{DynamicResource ScoreBadgeText}" />
+                                                                            <Grid>
+                                                                                <TextBlock Name="PART_TextUserScore" Opacity="0" />
+                                                                                <TextBlock Style="{DynamicResource ScoreBadgeText}"
+                                                                                        Text="{Binding Game.UserScore, Converter={PluginConverter Plugin=ThemeExtras, Converter=MultiplyConverter}, ConverterParameter=0.0625, FallbackValue=''}" />
+                                                                            </Grid>
                                                                         </Border>
 
                                                                         <Label Content="{DynamicResource LOCPlatformTitle}" />
