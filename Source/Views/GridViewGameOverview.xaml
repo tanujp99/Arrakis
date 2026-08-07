@@ -579,11 +579,33 @@
                                                                                     <TextBlock Name="PART_TextCriticScore" Style="{DynamicResource ScoreBadgeText}" />
                                                                                 </Border>
 
+                                                                                <!--
+                                                                                    Community score on a 0 to 10 scale, the way Metacritic
+                                                                                    prints a user score against a critic score out of 100.
+                                                                                    Playnite stores it out of 100, so this is a straight
+                                                                                    tenth: 79 reads 7.9. Exact for every value, so no
+                                                                                    rounding is needed, which matters because there is no
+                                                                                    rounding converter to be had.
+
+                                                                                    Critic score deliberately stays out of 100. The two
+                                                                                    scales differing is the point: it is how you tell at a
+                                                                                    glance which number is the press and which is the crowd.
+
+                                                                                    Same split as the user score badge. PART_TextCommunityScore
+                                                                                    stays wired and invisible for its Tag and Visibility, and
+                                                                                    the Tag is carried onto the digits because ScoreBadgeText
+                                                                                    picks its Foreground from it.
+                                                                                -->
                                                                                 <Border Style="{DynamicResource ScoreBadgeBorder}"
                                                                                         ToolTip="{DynamicResource LOCCommunityScore}"
                                                                                         Tag="{Binding ElementName=PART_TextCommunityScore, Path=Tag}"
                                                                                         Visibility="{Binding ElementName=PART_TextCommunityScore, Path=Visibility}">
-                                                                                    <TextBlock Name="PART_TextCommunityScore" Style="{DynamicResource ScoreBadgeText}" />
+                                                                                    <Grid>
+                                                                                        <TextBlock Name="PART_TextCommunityScore" Opacity="0" />
+                                                                                        <TextBlock Style="{DynamicResource ScoreBadgeText}"
+                                                                                                Tag="{Binding ElementName=PART_TextCommunityScore, Path=Tag}"
+                                                                                                Text="{Binding Game.CommunityScore, Converter={PluginConverter Plugin=ThemeExtras, Converter=MultiplyConverter}, ConverterParameter=0.1, FallbackValue=''}" />
+                                                                                    </Grid>
                                                                                 </Border>
                                                                             </StackPanel>
 
