@@ -72,6 +72,13 @@
                                         Style="{DynamicResource BaseTextBlockStyle}" />
                             </DockPanel>
                             <!--
+                                The stars set their own font and foreground rather than using
+                                IconFontStyle. That style picks its Foreground from a Tag
+                                compared against the strings "True" and "False" while the
+                                resource behind it is a Boolean, the same mismatch that left
+                                the selection border invisible, and it overwrites Tag, which
+                                this element needs for its own toggle.
+
                                 The row carries its own visibility: collapsing only when both
                                 halves are gone. Without that the wrapper stayed put and the
                                 two settings appeared to depend on each other.
@@ -95,7 +102,7 @@
                                         </Style.Triggers>
                                     </Style>
                                 </DockPanel.Style>
-                            <Grid x:Name="UserScorePips" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0"
+                            <Grid x:Name="UserScorePips" DockPanel.Dock="Right" Width="84" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0"
                                   Tag="{DynamicResource GridViewGameCoverShowUserScore}">
                                 <Grid.Style>
                                     <Style TargetType="Grid">
@@ -113,23 +120,35 @@
                                 </Grid.Style>
 
                                 <StackPanel Orientation="Horizontal" Opacity="0.3">
-                                    <TextBlock Text="&#xE734;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
-                                    <TextBlock Text="&#xE734;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
-                                    <TextBlock Text="&#xE734;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
-                                    <TextBlock Text="&#xE734;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
-                                    <TextBlock Text="&#xE734;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
-                                    <TextBlock Text="&#xE734;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
+                                    <TextBlock Text="&#xE734;" Width="14" FontSize="11" TextAlignment="Center" VerticalAlignment="Center"
+                                               FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="{DynamicResource TextBrush}" />
+                                    <TextBlock Text="&#xE734;" Width="14" FontSize="11" TextAlignment="Center" VerticalAlignment="Center"
+                                               FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="{DynamicResource TextBrush}" />
+                                    <TextBlock Text="&#xE734;" Width="14" FontSize="11" TextAlignment="Center" VerticalAlignment="Center"
+                                               FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="{DynamicResource TextBrush}" />
+                                    <TextBlock Text="&#xE734;" Width="14" FontSize="11" TextAlignment="Center" VerticalAlignment="Center"
+                                               FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="{DynamicResource TextBrush}" />
+                                    <TextBlock Text="&#xE734;" Width="14" FontSize="11" TextAlignment="Center" VerticalAlignment="Center"
+                                               FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="{DynamicResource TextBrush}" />
+                                    <TextBlock Text="&#xE734;" Width="14" FontSize="11" TextAlignment="Center" VerticalAlignment="Center"
+                                               FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="{DynamicResource TextBrush}" />
                                 </StackPanel>
 
                                 <Grid HorizontalAlignment="Left" ClipToBounds="True"
                                       Width="{Binding Game.UserScore, Converter={PluginConverter Plugin=ThemeExtras, Converter=MultiplyConverter}, ConverterParameter=0.84, FallbackValue=0}">
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                        <TextBlock Text="&#xE735;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
-                                        <TextBlock Text="&#xE735;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
-                                        <TextBlock Text="&#xE735;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
-                                        <TextBlock Text="&#xE735;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
-                                        <TextBlock Text="&#xE735;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
-                                        <TextBlock Text="&#xE735;" Width="14" FontSize="11" TextAlignment="Center" Style="{StaticResource IconFontStyle}" />
+                                        <TextBlock Text="&#xE735;" Width="14" FontSize="11" TextAlignment="Center" VerticalAlignment="Center"
+                                                   FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="{DynamicResource TextBrush}" />
+                                        <TextBlock Text="&#xE735;" Width="14" FontSize="11" TextAlignment="Center" VerticalAlignment="Center"
+                                                   FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="{DynamicResource TextBrush}" />
+                                        <TextBlock Text="&#xE735;" Width="14" FontSize="11" TextAlignment="Center" VerticalAlignment="Center"
+                                                   FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="{DynamicResource TextBrush}" />
+                                        <TextBlock Text="&#xE735;" Width="14" FontSize="11" TextAlignment="Center" VerticalAlignment="Center"
+                                                   FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="{DynamicResource TextBrush}" />
+                                        <TextBlock Text="&#xE735;" Width="14" FontSize="11" TextAlignment="Center" VerticalAlignment="Center"
+                                                   FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="{DynamicResource TextBrush}" />
+                                        <TextBlock Text="&#xE735;" Width="14" FontSize="11" TextAlignment="Center" VerticalAlignment="Center"
+                                                   FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="{DynamicResource TextBrush}" />
                                     </StackPanel>
                                 </Grid>
                             </Grid>
