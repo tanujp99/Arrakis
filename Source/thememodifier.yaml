@@ -1,4 +1,4 @@
-Constants:
+﻿Constants:
     - "Appearance"
     - ThemeDarkStyle: 'Switch to Dune night'
   
@@ -26,5 +26,6 @@ Constants:
     - GridViewGameCoverShowCompletionStatus: 'Display completion Status under game cover'
     - GridViewGameCoverShowPlayedTime: 'Display played time under game covers'
     - GridViewGameCoverShowUserScore: 'Display my score as pips under game covers'
+    - AgeRatingOfficialArt: 'Use official age rating artwork instead of the drawn marks'
   
   

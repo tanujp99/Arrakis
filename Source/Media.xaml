@@ -12,7 +12,7 @@
         square at any size; Fant would blur them into ordinary blobs, which is
         the whole reason for pixel art on a high-DPI display.
     -->
-        <BitmapImage x:Key="BadgeTrophy" UriSource="{ThemeFile 'Images/Badges/badge_trophy.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
+    <BitmapImage x:Key="BadgeTrophy" UriSource="{ThemeFile 'Images/Badges/badge_trophy.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
     <BitmapImage x:Key="BadgeMedal" UriSource="{ThemeFile 'Images/Badges/badge_medal.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
     <BitmapImage x:Key="BadgeBeaten" UriSource="{ThemeFile 'Images/Badges/badge_beaten.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
     <BitmapImage x:Key="BadgeAbandoned" UriSource="{ThemeFile 'Images/Badges/badge_abandoned.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
@@ -20,7 +20,27 @@
     <BitmapImage x:Key="PipPlan" UriSource="{ThemeFile 'Images/Badges/pip_plan.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
     <BitmapImage x:Key="PipOnHold" UriSource="{ThemeFile 'Images/Badges/pip_onhold.png'}" RenderOptions.BitmapScalingMode="NearestNeighbor" popt:Freeze="True"/>
 
-<BitmapImage x:Key="TrayIcon" UriSource="{ThemeFile 'Images/applogo.ico'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
+    <!--
+        Official age rating marks, from Wikimedia Commons. Fant rather than
+        NearestNeighbor: these are smooth vector renders, the opposite of the
+        pixel-art badges above. Opt-in through the theme settings; the drawn
+        marks stay the default so the package does not ship trademarked art
+        unless it is asked for.
+    -->
+    <BitmapImage x:Key="AgeMarkPegi3" UriSource="{ThemeFile 'Images/AgeRatings/pegi_3.png'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
+    <BitmapImage x:Key="AgeMarkPegi7" UriSource="{ThemeFile 'Images/AgeRatings/pegi_7.png'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
+    <BitmapImage x:Key="AgeMarkPegi12" UriSource="{ThemeFile 'Images/AgeRatings/pegi_12.png'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
+    <BitmapImage x:Key="AgeMarkPegi16" UriSource="{ThemeFile 'Images/AgeRatings/pegi_16.png'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
+    <BitmapImage x:Key="AgeMarkPegi18" UriSource="{ThemeFile 'Images/AgeRatings/pegi_18.png'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
+    <BitmapImage x:Key="AgeMarkEsrbEc" UriSource="{ThemeFile 'Images/AgeRatings/esrb_ec.png'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
+    <BitmapImage x:Key="AgeMarkEsrbE" UriSource="{ThemeFile 'Images/AgeRatings/esrb_e.png'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
+    <BitmapImage x:Key="AgeMarkEsrbE10" UriSource="{ThemeFile 'Images/AgeRatings/esrb_e10.png'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
+    <BitmapImage x:Key="AgeMarkEsrbT" UriSource="{ThemeFile 'Images/AgeRatings/esrb_t.png'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
+    <BitmapImage x:Key="AgeMarkEsrbM" UriSource="{ThemeFile 'Images/AgeRatings/esrb_m.png'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
+    <BitmapImage x:Key="AgeMarkEsrbAo" UriSource="{ThemeFile 'Images/AgeRatings/esrb_ao.png'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
+    <BitmapImage x:Key="AgeMarkEsrbRp" UriSource="{ThemeFile 'Images/AgeRatings/esrb_rp.png'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
+
+    <BitmapImage x:Key="TrayIcon" UriSource="{ThemeFile 'Images/applogo.ico'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
     <BitmapImage x:Key="TrayIconWhite" UriSource="{ThemeFile 'Images/applogo_black.ico'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
     <BitmapImage x:Key="TrayIconBlack" UriSource="{ThemeFile 'Images/applogo_white.ico'}" RenderOptions.BitmapScalingMode="Fant" popt:Freeze="True"/>
     <TextBlock x:Key="FullscreenModeIcon" Text="&#xe7f4;" FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets"/>

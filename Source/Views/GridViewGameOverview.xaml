@@ -727,6 +727,23 @@
                                                                         <ItemsControl.ItemTemplate>
                                                                             <DataTemplate>
                                                                                 <Grid Margin="0,0,0,4">
+                                                                            <!--
+                                                                                Official artwork, opt-in. Sits beside the drawn marks rather than
+                                                                                replacing them: the toggle hides one set and shows the other, so a
+                                                                                package that never turns it on ships no trademarked art.
+                                                                            -->
+                                                                            <Image x:Name="OfficialMark" Visibility="Collapsed" Height="54" Stretch="Uniform"
+                                                                                   HorizontalAlignment="Right" VerticalAlignment="Top" />
+                                                                            <Grid x:Name="DrawnMark" Tag="{DynamicResource AgeRatingOfficialArt}">
+                                                                                <Grid.Style>
+                                                                                    <Style TargetType="Grid">
+                                                                                        <Style.Triggers>
+                                                                                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=Tag}" Value="Visible">
+                                                                                                <Setter Property="Visibility" Value="Collapsed" />
+                                                                                            </DataTrigger>
+                                                                                        </Style.Triggers>
+                                                                                    </Style>
+                                                                                </Grid.Style>
                                                                                     <Border x:Name="Pegi" Visibility="Collapsed" Width="42" Height="54" CornerRadius="5" Background="#4C9C2E"
                                         BorderBrush="#141414" BorderThickness="2">
                                                                                         <Grid>
@@ -754,9 +771,12 @@
                                                                                     <Border x:Name="Fallback" Height="20" CornerRadius="3" Background="#6B7280" Padding="6,0,6,0">
                                                                                         <TextBlock Text="{Binding Name}" Foreground="White" FontSize="10" VerticalAlignment="Center" />
                                                                                     </Border>
-                                                                                </Grid>
+                                                                                                                                                            </Grid>
+                                                                        </Grid>
                                                                                 <DataTemplate.Triggers>
                                                                                     <DataTrigger Binding="{Binding Name}" Value="PEGI 3">
+                                                                                    <Setter TargetName="OfficialMark" Property="Source" Value="{DynamicResource AgeMarkPegi3}" />
+                                                                                    <Setter TargetName="OfficialMark" Property="Visibility" Value="{DynamicResource AgeRatingOfficialArt}" />
                                                                                         <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
                                                                                         <Setter TargetName="Pegi" Property="Visibility" Value="Visible" />
                                                                                         <Setter TargetName="Pegi" Property="Background" Value="#4C9C2E" />
@@ -764,6 +784,8 @@
                                                                                         <Setter TargetName="PegiTag" Property="Foreground" Value="#4C9C2E" />
                                                                                     </DataTrigger>
                                                                                     <DataTrigger Binding="{Binding Name}" Value="PEGI 7">
+                                                                                    <Setter TargetName="OfficialMark" Property="Source" Value="{DynamicResource AgeMarkPegi7}" />
+                                                                                    <Setter TargetName="OfficialMark" Property="Visibility" Value="{DynamicResource AgeRatingOfficialArt}" />
                                                                                         <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
                                                                                         <Setter TargetName="Pegi" Property="Visibility" Value="Visible" />
                                                                                         <Setter TargetName="Pegi" Property="Background" Value="#4C9C2E" />
@@ -771,6 +793,8 @@
                                                                                         <Setter TargetName="PegiTag" Property="Foreground" Value="#4C9C2E" />
                                                                                     </DataTrigger>
                                                                                     <DataTrigger Binding="{Binding Name}" Value="PEGI 12">
+                                                                                    <Setter TargetName="OfficialMark" Property="Source" Value="{DynamicResource AgeMarkPegi12}" />
+                                                                                    <Setter TargetName="OfficialMark" Property="Visibility" Value="{DynamicResource AgeRatingOfficialArt}" />
                                                                                         <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
                                                                                         <Setter TargetName="Pegi" Property="Visibility" Value="Visible" />
                                                                                         <Setter TargetName="Pegi" Property="Background" Value="#F5A623" />
@@ -778,6 +802,8 @@
                                                                                         <Setter TargetName="PegiTag" Property="Foreground" Value="#F5A623" />
                                                                                     </DataTrigger>
                                                                                     <DataTrigger Binding="{Binding Name}" Value="PEGI 16">
+                                                                                    <Setter TargetName="OfficialMark" Property="Source" Value="{DynamicResource AgeMarkPegi16}" />
+                                                                                    <Setter TargetName="OfficialMark" Property="Visibility" Value="{DynamicResource AgeRatingOfficialArt}" />
                                                                                         <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
                                                                                         <Setter TargetName="Pegi" Property="Visibility" Value="Visible" />
                                                                                         <Setter TargetName="Pegi" Property="Background" Value="#F5A623" />
@@ -785,6 +811,8 @@
                                                                                         <Setter TargetName="PegiTag" Property="Foreground" Value="#F5A623" />
                                                                                     </DataTrigger>
                                                                                     <DataTrigger Binding="{Binding Name}" Value="PEGI 18">
+                                                                                    <Setter TargetName="OfficialMark" Property="Source" Value="{DynamicResource AgeMarkPegi18}" />
+                                                                                    <Setter TargetName="OfficialMark" Property="Visibility" Value="{DynamicResource AgeRatingOfficialArt}" />
                                                                                         <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
                                                                                         <Setter TargetName="Pegi" Property="Visibility" Value="Visible" />
                                                                                         <Setter TargetName="Pegi" Property="Background" Value="#D0021B" />
@@ -792,36 +820,50 @@
                                                                                         <Setter TargetName="PegiTag" Property="Foreground" Value="#D0021B" />
                                                                                     </DataTrigger>
                                                                                     <DataTrigger Binding="{Binding Name}" Value="ESRB EC">
+                                                                                    <Setter TargetName="OfficialMark" Property="Source" Value="{DynamicResource AgeMarkEsrbEc}" />
+                                                                                    <Setter TargetName="OfficialMark" Property="Visibility" Value="{DynamicResource AgeRatingOfficialArt}" />
                                                                                         <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
                                                                                         <Setter TargetName="Esrb" Property="Visibility" Value="Visible" />
                                                                                         <Setter TargetName="EsrbVal" Property="Text" Value="EC" />
                                                                                     </DataTrigger>
                                                                                     <DataTrigger Binding="{Binding Name}" Value="ESRB E">
+                                                                                    <Setter TargetName="OfficialMark" Property="Source" Value="{DynamicResource AgeMarkEsrbE}" />
+                                                                                    <Setter TargetName="OfficialMark" Property="Visibility" Value="{DynamicResource AgeRatingOfficialArt}" />
                                                                                         <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
                                                                                         <Setter TargetName="Esrb" Property="Visibility" Value="Visible" />
                                                                                         <Setter TargetName="EsrbVal" Property="Text" Value="E" />
                                                                                     </DataTrigger>
                                                                                     <DataTrigger Binding="{Binding Name}" Value="ESRB E10+">
+                                                                                    <Setter TargetName="OfficialMark" Property="Source" Value="{DynamicResource AgeMarkEsrbE10}" />
+                                                                                    <Setter TargetName="OfficialMark" Property="Visibility" Value="{DynamicResource AgeRatingOfficialArt}" />
                                                                                         <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
                                                                                         <Setter TargetName="Esrb" Property="Visibility" Value="Visible" />
                                                                                         <Setter TargetName="EsrbVal" Property="Text" Value="E10+" />
                                                                                     </DataTrigger>
                                                                                     <DataTrigger Binding="{Binding Name}" Value="ESRB T">
+                                                                                    <Setter TargetName="OfficialMark" Property="Source" Value="{DynamicResource AgeMarkEsrbT}" />
+                                                                                    <Setter TargetName="OfficialMark" Property="Visibility" Value="{DynamicResource AgeRatingOfficialArt}" />
                                                                                         <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
                                                                                         <Setter TargetName="Esrb" Property="Visibility" Value="Visible" />
                                                                                         <Setter TargetName="EsrbVal" Property="Text" Value="T" />
                                                                                     </DataTrigger>
                                                                                     <DataTrigger Binding="{Binding Name}" Value="ESRB M">
+                                                                                    <Setter TargetName="OfficialMark" Property="Source" Value="{DynamicResource AgeMarkEsrbM}" />
+                                                                                    <Setter TargetName="OfficialMark" Property="Visibility" Value="{DynamicResource AgeRatingOfficialArt}" />
                                                                                         <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
                                                                                         <Setter TargetName="Esrb" Property="Visibility" Value="Visible" />
                                                                                         <Setter TargetName="EsrbVal" Property="Text" Value="M" />
                                                                                     </DataTrigger>
                                                                                     <DataTrigger Binding="{Binding Name}" Value="ESRB AO">
+                                                                                    <Setter TargetName="OfficialMark" Property="Source" Value="{DynamicResource AgeMarkEsrbAo}" />
+                                                                                    <Setter TargetName="OfficialMark" Property="Visibility" Value="{DynamicResource AgeRatingOfficialArt}" />
                                                                                         <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
                                                                                         <Setter TargetName="Esrb" Property="Visibility" Value="Visible" />
                                                                                         <Setter TargetName="EsrbVal" Property="Text" Value="AO" />
                                                                                     </DataTrigger>
                                                                                     <DataTrigger Binding="{Binding Name}" Value="ESRB RP">
+                                                                                    <Setter TargetName="OfficialMark" Property="Source" Value="{DynamicResource AgeMarkEsrbRp}" />
+                                                                                    <Setter TargetName="OfficialMark" Property="Visibility" Value="{DynamicResource AgeRatingOfficialArt}" />
                                                                                         <Setter TargetName="Fallback" Property="Visibility" Value="Collapsed" />
                                                                                         <Setter TargetName="Esrb" Property="Visibility" Value="Visible" />
                                                                                         <Setter TargetName="EsrbVal" Property="Text" Value="RP" />

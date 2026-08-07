@@ -72,12 +72,30 @@
                                         Style="{DynamicResource BaseTextBlockStyle}" />
                             </DockPanel>
                             <!--
+                                The row carries its own visibility: collapsing only when both
+                                halves are gone. Without that the wrapper stayed put and the
+                                two settings appeared to depend on each other.
+
                                 Score and completion status share one line. Stacked, the pair
                                 overflowed the space under the cover and the status was clipped
                                 away; side by side they fit without adding height to the tile.
                             -->
-                            <DockPanel Width="{Settings GridItemWidth}" Margin="0,0,0,4">
-                            <Grid x:Name="UserScorePips" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,0,0"
+                            <DockPanel x:Name="ScoreStatusRow" Width="{Settings GridItemWidth}" Margin="0,0,0,4">
+                                <DockPanel.Style>
+                                    <Style TargetType="DockPanel">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding ElementName=UserScorePips, Path=Visibility}" Value="Collapsed" />
+                                                    <Condition Binding="{Binding ElementName=PlayingStatus, Path=Visibility}" Value="Collapsed" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DockPanel.Style>
+                            <Grid x:Name="UserScorePips" DockPanel.Dock="Right" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,0,0"
                                   Tag="{DynamicResource GridViewGameCoverShowUserScore}">
                                 <Grid.Style>
                                     <Style TargetType="Grid">
@@ -131,7 +149,7 @@
                                     </Style>
                                 </DockPanel.Style>
                                 <!-- Same glyph vocabulary as the hero trophy, so the two read as one thing. -->
-                                <TextBlock FontSize="{DynamicResource FontSizeSmall}" TextAlignment="Left" Margin="0,0,0,0">
+                                <TextBlock FontSize="{DynamicResource FontSizeSmall}" TextAlignment="Left" VerticalAlignment="Center" Margin="0,0,0,0">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock" BasedOn="{StaticResource IconFontStyle}">
                                             <Setter Property="Text" Value="&#xE9F9;" />
