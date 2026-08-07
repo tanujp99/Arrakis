@@ -1,31 +1,43 @@
-﻿Constants:
-    - "Appearance"
-    - ThemeDarkStyle: 'Switch to Dune night'
-  
-    - "Colors"
-    - GlyphBrush: 'Primary color'
-    - HighlightGlyphBrush: 'Accent color'
-    - WindowBackgroundBrush: 'Light theme background color'
-    - DarkWindowBackgroundBrush: 'Dark theme background color'
+> Ordering here is the ordering the settings page shows, and the quoted
+> strings are section headers. Grouped by what a setting affects rather than
+> by which control it happens to render as, so related options sit together
+> even where one is a slider and its neighbour a checkbox.
+>
+> The four Visibility-typed constants render as three-option dropdowns
+> because that is how ThemeModifier maps the type; sys:Boolean would render
+> a checkbox instead. They are not Booleans because each one feeds elements
+> whose visibility has more than one condition, and the checkbox pattern
+> sets Visibility as a local value, which would override those conditions.
 
-    - "Layouts"
-    - GameOverviewWidth(360,2400): 'Maximum width of overview'
-    - GameDetailInfoWidth(200,800): 'Maximum width of details'
-  
-    - "General Settings"
-    - ShowIconTextOnLink: 'Show full link name next to the icon'  
-  
-    - "Grid View Settings"
-  
-    - GridViewGameCoverShowFavorite: 'Show favorite icon on game cover'
-    - GridViewGameCoverShowPlatformBanner: 'Show platform banners ("ThemeExtras" extension needed)'
-    - PlatformBannerHeight(12,120): 'Platform banner height (how much of the cover it covers)'
-    - GridViewGameCoverUseRoundedCorners: 'Use rounded corners on game covers'
-    - GridViewGameCoverShowShineAnimation: 'Show luster on game cover when hover'
-    - GridViewGameCoverShowHighlightBorder: 'Show luster on the border of game cover when selected'
-    - GridViewGameCoverShowCompletionStatus: 'Display completion Status under game cover'
-    - GridViewGameCoverShowPlayedTime: 'Display played time under game covers'
-    - GridViewGameCoverShowUserScore: 'Display my score as pips under game covers'
-    - AgeRatingOfficialArt: 'Use official age rating artwork instead of the drawn marks'
-  
-  
+Constants:
+    - "Theme"
+    - ThemeDarkStyle: 'Switch to Dune night'
+
+    - "Colours"
+    - GlyphBrush: 'Primary colour'
+    - HighlightGlyphBrush: 'Accent colour'
+    - WindowBackgroundBrush: 'Background colour, light theme'
+    - DarkWindowBackgroundBrush: 'Background colour, dark theme'
+
+    - "Panel sizes"
+    - GameOverviewWidth(360,2400): 'Maximum width of the overview panel'
+    - GameDetailInfoWidth(200,800): 'Maximum width of the details panel'
+
+    - "Game covers"
+    - GridViewGameCoverUseRoundedCorners: 'Rounded corners on covers'
+    - GridViewGameCoverShowFavorite: 'Favourite icon on the cover'
+    - GridViewGameCoverShowPlatformBanner: 'Platform banner on the cover (needs the "ThemeExtras" extension)'
+    - PlatformBannerHeight(12,120): 'Platform banner height (how far it covers the art)'
+
+    - "Cover hover and selection"
+    - GridViewGameCoverShowShineAnimation: 'Luster across the cover on hover'
+    - GridViewGameCoverShowHighlightBorder: 'Luster around the border when selected'
+
+    - "Under the cover"
+    - GridViewGameCoverShowCompletionStatus: 'Completion status'
+    - GridViewGameCoverShowPlayedTime: 'Time played'
+    - GridViewGameCoverShowUserScore: 'My score, as hearts'
+
+    - "Details panel"
+    - AgeRatingOfficialArt: 'Official age rating artwork instead of the drawn marks'
+    - ShowIconTextOnLink: 'Full link name next to the icon'
