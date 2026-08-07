@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
@@ -226,7 +226,7 @@
                                                                     </Style>
                                                                 </StackPanel.Style>
                                                                 <!--Image Thumbnail-->
-                                                                <Grid Width="120" Height="68">
+                                                                <Grid Width="88" Height="50">
                                                                     <Grid Margin="4">
                                                                         <Grid.OpacityMask>
                                                                             <VisualBrush>
@@ -251,7 +251,7 @@
                                                                             Style="{DynamicResource TransparentRadioButton}" />
                                                                 </Grid>
                                                                 <!--Video Thumbnail-->
-                                                                <Grid Margin="16,0,0,0" Width="120" Height="68">
+                                                                <Grid Margin="10,0,0,0" Width="88" Height="50">
                                                                     <Grid Margin="4">
                                                                         <Grid.OpacityMask>
                                                                             <VisualBrush>
@@ -326,7 +326,7 @@
                                                                     </DataTrigger>
                                                                     <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Beaten">
                                                                         <Setter Property="Visibility" Value="Visible" />
-                                                                        <Setter Property="Source" Value="{DynamicResource BadgeTrophy}" />
+                                                                        <Setter Property="Source" Value="{DynamicResource BadgeBeaten}" />
                                                                     </DataTrigger>
                                                                     <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Completed">
                                                                         <Setter Property="Visibility" Value="Visible" />
@@ -336,39 +336,42 @@
                                                                         <Setter Property="Visibility" Value="Visible" />
                                                                         <Setter Property="Source" Value="{DynamicResource BadgeAbandoned}" />
                                                                     </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Played">
-                                                                    <Setter Property="Visibility" Value="Visible" />
-                                                                    <Setter Property="Source" Value="{DynamicResource BadgeProgressActive}" />
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="On Hold">
-                                                                    <Setter Property="Visibility" Value="Visible" />
-                                                                    <Setter Property="Source" Value="{DynamicResource BadgeProgressOnHold}" />
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Beaten">
-                                                                    <Setter Property="Visibility" Value="Visible" />
-                                                                    <Setter Property="Source" Value="{DynamicResource BadgeBeaten}" />
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Completed">
-                                                                    <Setter Property="Visibility" Value="Visible" />
-                                                                    <Setter Property="Source" Value="{DynamicResource BadgeCompleted}" />
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding Game.CompletionStatus.Name}" Value="Abandoned">
-                                                                    <Setter Property="Visibility" Value="Visible" />
-                                                                    <Setter Property="Source" Value="{DynamicResource BadgeAbandoned}" />
-                                                                    </DataTrigger>
                                                                     </Style.Triggers>
                                                                     </Style>
                                                                     </Image.Style>
                                                                     </Image>
+                                                                    <!--
+                                                                        The logo already says the name, usually better than text can.
+                                                                        Rather than re-derive when a logo exists, the title watches the
+                                                                        logo border's own visibility, so the two cannot disagree.
+                                                                    -->
                                                                     <TextBlock Text="{Binding Game.Name}" FontSize="{DynamicResource FontSizeLarge24}"
                                                                             FontWeight="Bold" Foreground="White" TextWrapping="Wrap"
-                                                                            HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,8" />
+                                                                            HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,8">
+                                                                        <TextBlock.Style>
+                                                                            <Style TargetType="TextBlock">
+                                                                                <Setter Property="Visibility" Value="Visible" />
+                                                                                <Style.Triggers>
+                                                                                    <DataTrigger Binding="{Binding ElementName=ExtraMetadataLoader_LogoLoaderControlGrid, Path=Visibility}"
+                                                                                            Value="Visible">
+                                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                                    </DataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </TextBlock.Style>
+                                                                    </TextBlock>
                                                                 </DockPanel>
-                                                                <StackPanel Orientation="Horizontal">
-                                                                
-
+                                                                <!--
+                                                                    WrapPanel, not StackPanel. A horizontal StackPanel measures its
+                                                                    children with infinite width, so the genre WrapPanel below never
+                                                                    saw a constraint to wrap against and simply ran off the panel
+                                                                    edge, silently clipping genres. Same reason PART_ElemGenres is
+                                                                    vertical: it has one child, and vertical passes the real width
+                                                                    down instead of infinity.
+                                                                -->
+                                                                <WrapPanel Orientation="Horizontal">
                                                                 <Button Name="PART_ButtonSource" Margin="4,2,4,0" Padding="0" Style="{DynamicResource PropertyItemOutlinedButton}" />
-                                                                <StackPanel Name="PART_ElemGenres" Orientation="Horizontal">
+                                                                <StackPanel Name="PART_ElemGenres" Orientation="Vertical">
                                                                     <StackPanel.Style>
                                                                         <Style TargetType="StackPanel">
                                                                             <Setter Property="Visibility" Value="Visible" />
@@ -399,7 +402,7 @@
                                                                     </ItemsControl>
                                                                 </StackPanel>
 
-                                                            </StackPanel>
+                                                            </WrapPanel>
                                                             </StackPanel>
 
                                                         </Grid>
