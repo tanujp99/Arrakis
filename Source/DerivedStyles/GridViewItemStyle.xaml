@@ -149,8 +149,22 @@
                                                FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="{DynamicResource TextBrush}" />
                                 </StackPanel>
 
+                                <!--
+                                    0.8125 is 78/96, not 78/100. StarRatings works out points per
+                                    star with integer division: 100/6 gives 16, not 16.67, so six
+                                    stars is 96 and the scale never reaches 100. Scaling against
+                                    100 left every rating just short of its heart, which is why
+                                    five stars lit four hearts and most of a fifth.
+
+                                    At 78/96 the whole scale lands exactly: 16 fills one heart,
+                                    96 fills six, and because the half-star values are multiples
+                                    of 8 they land on exact half hearts too.
+
+                                    A stray 100 from before StarRatings overruns to 81px, and the
+                                    ClipToBounds above trims it back to a full six.
+                                -->
                                 <Grid HorizontalAlignment="Left" ClipToBounds="True"
-                                      Width="{Binding Game.UserScore, Converter={PluginConverter Plugin=ThemeExtras, Converter=MultiplyConverter}, ConverterParameter=0.78, FallbackValue=0}">
+                                      Width="{Binding Game.UserScore, Converter={PluginConverter Plugin=ThemeExtras, Converter=MultiplyConverter}, ConverterParameter=0.8125, FallbackValue=0}">
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                         <TextBlock Text="&#xEB52;" Width="13" FontSize="11.5" TextAlignment="Center" VerticalAlignment="Center"
                                                    FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="{DynamicResource TextBrush}" />
