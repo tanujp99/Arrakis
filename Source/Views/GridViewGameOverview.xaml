@@ -961,7 +961,15 @@
                                                                                 Visibility="{Binding ElementName=PART_TextUserScore, Path=Visibility}">
                                                                             <Grid>
                                                                                 <TextBlock Name="PART_TextUserScore" Opacity="0" />
+                                                                                <!--
+                                                                                    Tag comes across from the wired element too. ScoreBadgeText
+                                                                                    picks its Foreground from that Tag: white normally, near
+                                                                                    black on the amber Mixed badge, where white would not read.
+                                                                                    Moving the digits here without the Tag left the style with
+                                                                                    nothing to switch on.
+                                                                                -->
                                                                                 <TextBlock Style="{DynamicResource ScoreBadgeText}"
+                                                                                        Tag="{Binding ElementName=PART_TextUserScore, Path=Tag}"
                                                                                         Text="{Binding Game.UserScore, Converter={PluginConverter Plugin=ThemeExtras, Converter=MultiplyConverter}, ConverterParameter=0.0625, FallbackValue=''}" />
                                                                             </Grid>
                                                                         </Border>
