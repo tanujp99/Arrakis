@@ -73,8 +73,14 @@
         <SolidColorBrush x:Key="GlyphBrush" Color="{DynamicResource GlyphColor}" />
         <SolidColorBrush x:Key="HighlightGlyphBrush" Color="{DynamicResource HighlightGlyphColor}" />
 
+        <!--
+            DarkAccentBackgroundBrush pointed at the light accent, so the pair
+            was one colour wearing two names and the dark hook did nothing. It
+            takes the site's dark-accent now, which is the whole reason the
+            hook exists.
+        -->
         <SolidColorBrush x:Key="AccentBackgroundBrush" Color="{DynamicResource AccentIdleColor}" />
-        <SolidColorBrush x:Key="DarkAccentBackgroundBrush" Color="{DynamicResource AccentIdleColor}" />
+        <SolidColorBrush x:Key="DarkAccentBackgroundBrush" Color="{DynamicResource DarkAccentIdleColor}" />
 
     <!--ThemeModifier Options Ends-->
 
@@ -126,9 +132,24 @@
     <Color x:Key="MainColorDark">#0D1225</Color>
     <Color x:Key="HoverColor">#247BA0</Color>
     <Color x:Key="GlyphColor">#FFFFFF</Color>
-    <Color x:Key="HighlightGlyphColor">#FF0379FF</Color>
-    <Color x:Key="AccentIdleColor">#FF0379FF</Color>
-    <Color x:Key="AccentSelectedColor">#FF04A5FF</Color>
+    <!--
+        Accent taken from tanujp.com, which names all four in its stylesheet:
+        light-accent #C30B4E with hover #A30B3A, dark-accent #FF90E8 with
+        hover #FF6EDF. Not interchangeable, and the numbers say why: the
+        crimson is 5.07:1 on this theme's light background but the pink is
+        1.69:1 there, while on dark the pink is 9.13:1 and the crimson only
+        3.05:1. Each is built for its own background.
+
+        Light values lead, since that is the theme in use. Note the hover
+        darkens rather than lightens, which is the site's own choice and the
+        correct one on a light background: #A30B3A is 6.61:1 against 5.07:1
+        idle, so hovering gains contrast instead of losing it.
+    -->
+    <Color x:Key="HighlightGlyphColor">#FFC30B4E</Color>
+    <Color x:Key="AccentIdleColor">#FFC30B4E</Color>
+    <Color x:Key="AccentSelectedColor">#FFA30B3A</Color>
+    <Color x:Key="DarkAccentIdleColor">#FFFF90E8</Color>
+    <Color x:Key="DarkAccentSelectedColor">#FFFF6EDF</Color>
 
     <Color x:Key="BackgroundToneColor">#FFCC00</Color>
     <Color x:Key="GridItemBackgroundColor">#151E3D</Color>
@@ -197,7 +218,8 @@
 
     <SolidColorBrush x:Key="AccentIdleBrush" Color="{DynamicResource AccentIdleColor}" />
     <SolidColorBrush x:Key="AccentHoverBrush" Color="{DynamicResource AccentSelectedColor}" />
-    <SolidColorBrush x:Key="AccentDisabledBrush" Color="#024DA3" />
+    <!-- Disabled accent, desaturated crimson to match. Was a blue left from the old accent. -->
+    <SolidColorBrush x:Key="AccentDisabledBrush" Color="#7A2A44" />
 
     
 
@@ -291,3 +313,4 @@
     </RadialGradientBrush>
 
 </ResourceDictionary>
+
