@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
@@ -13,7 +13,7 @@
         <sys:Boolean x:Key="GridViewListShowFavorite">True</sys:Boolean>
         <sys:Boolean x:Key="ShowIconTextOnLink">True</sys:Boolean>
 
-        <SolidColorBrush x:Key="GridViewItemMaskBackgroundBrush" Color="#1e1e1e" />
+        <SolidColorBrush x:Key="GridViewItemMaskBackgroundBrush" Color="#1E1E1E" />
         <CornerRadius x:Key="GridViewCoverCornerRadius">6</CornerRadius>
         <CornerRadius x:Key="GridViewCoverGridBackgroundDisabledCornerRadius">8,8,8,8</CornerRadius>
         <CornerRadius x:Key="GridViewSelectionBorderCornerRadius">16</CornerRadius>
@@ -105,10 +105,23 @@
 
     <Color x:Key="BlackColor">#FF000000</Color>
     <Color x:Key="WhiteColor">#FFFFFFFF</Color>
-    <Color x:Key="TextColor">#000000</Color>
+    <!--
+        Body text is off-black and off-white rather than #000 and #FFF. Pure
+        black on the light background measures 17.6:1 and pure white on the
+        dark one 18.4:1, far past the 4.5:1 that AA asks for, and that excess
+        is not free: maximum contrast is what makes light-theme text feel
+        harsh and light-on-dark text bloom at the edges. Backing off to
+        #1A1A1A and #EDEDED gives 14.6:1 and 15.7:1, still enormous headroom,
+        with none of the glare. Every major design system does this: Material,
+        Carbon and Fluent all specify near-black and near-white for text.
+
+        BlackColor and WhiteColor above are left pure on purpose. They are
+        endpoints for masks and overlays, not text.
+    -->
+    <Color x:Key="TextColor">#1A1A1A</Color>
     <Color x:Key="TextColorDarker">#66FFFFFF</Color>
     <Color x:Key="TextColorLighter">#99000000</Color>
-    <Color x:Key="TextColorDark">#FFFFFF</Color>
+    <Color x:Key="TextColorDark">#EDEDED</Color>
     <Color x:Key="MainColor">#2C3A67</Color>
     <Color x:Key="MainColorDark">#0D1225</Color>
     <Color x:Key="HoverColor">#247BA0</Color>
@@ -118,12 +131,12 @@
     <Color x:Key="AccentSelectedColor">#FF04A5FF</Color>
 
     <Color x:Key="BackgroundToneColor">#FFCC00</Color>
-    <Color x:Key="GridItemBackgroundColor">#151e3d</Color>
+    <Color x:Key="GridItemBackgroundColor">#151E3D</Color>
 
     <Color x:Key="PanelSeparatorColor">#33808080</Color>
 
-    <Color x:Key="WindowPanelSeparatorColor">#14ffffff</Color>
-    <Color x:Key="DataChangeNotifColor">#ffa500</Color>
+    <Color x:Key="WindowPanelSeparatorColor">#14FFFFFF</Color>
+    <Color x:Key="DataChangeNotifColor">#FFA500</Color>
 
     <!--Dune Newly Added Color-->
     <Color x:Key="8%White">#14FFFFFF</Color>
@@ -169,7 +182,14 @@
 
     <SolidColorBrush x:Key="DisabledBrush" Color="#CCCCCC" />
     <SolidColorBrush x:Key="LinkButtonBrush" Color="#6800D1" />
-    <SolidColorBrush x:Key="PromptBrush" Color="#999999" />
+    <!--
+        Placeholder text. #999999 measured 2.4:1 on the light background,
+        which is below AA and below the 3:1 floor for any meaningful mark.
+        Placeholders being quiet is the point, but they still have to be
+        read, and WCAG grants them no exemption. #636363 is 5.0:1 and stays
+        clearly lighter than body text, so the hierarchy survives.
+    -->
+    <SolidColorBrush x:Key="PromptBrush" Color="#636363" />
     <SolidColorBrush x:Key="SubtalBrush" Color="#666666" />
     <SolidColorBrush x:Key="IdleBrush" Color="#333333" />
     <SolidColorBrush x:Key="HoverBrush" Color="#212121" />
@@ -182,7 +202,7 @@
     
 
     <SolidColorBrush x:Key="TooltipBackgroundBrush" Color="{DynamicResource BackgroundToneColor}" />
-    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#0a0e1e" />
+    <SolidColorBrush x:Key="ButtonBackgroundBrush" Color="#0A0E1E" />
     <SolidColorBrush x:Key="GridItemBackgroundBrush" Color="{DynamicResource GridItemBackgroundColor}" />
     
     
@@ -201,9 +221,9 @@
 
     <SolidColorBrush x:Key="PositiveRatingBrush" Color="#01875F" />
     <SolidColorBrush x:Key="NegativeRatingBrush" Color="#C7212D" />
-    <SolidColorBrush x:Key="MixedRatingBrush" Color="#f5C518" />
+    <SolidColorBrush x:Key="MixedRatingBrush" Color="#F5C518" />
 
-    <SolidColorBrush x:Key="WarningBrush" Color="#ff6b6b" />
+    <SolidColorBrush x:Key="WarningBrush" Color="#FF6B6B" />
 
     <LinearGradientBrush x:Key="ExpanderBackgroundBrush" StartPoint="-0.1,0.5" EndPoint="1.2,1" >
         <GradientStop Color="#FF2C3A67" Offset="0"/>

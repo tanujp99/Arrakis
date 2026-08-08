@@ -184,12 +184,19 @@
                                             the accent is user-set and could land anywhere, and this
                                             needs to read as special in both themes.
 
+                                            Deeper than the gold first chosen. #E0A400 measured
+                                            1.9:1 against the light background, under the 3:1 floor
+                                            for a mark that carries meaning, so on the light theme
+                                            it was the one heart you could not see. #A87400 is
+                                            3.4:1 on light and 4.5:1 on dark: still unmistakably
+                                            gold beside the near-black hearts, and legible in both.
+
                                             It only appears as the fill reaches the last heart, so
                                             5.5 shows half of it, which is the right amount of
                                             almost.
                                         -->
                                         <TextBlock Text="&#xEB52;" Width="13" FontSize="11.5" TextAlignment="Center" VerticalAlignment="Center"
-                                                   FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="#E0A400" />
+                                                   FontFamily="Segoe Fluent Icons, Segoe MDL2 Assets" Foreground="#A87400" />
                                     </StackPanel>
                                 </Grid>
                             </Grid>
